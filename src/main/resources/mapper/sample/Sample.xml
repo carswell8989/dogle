@@ -3,7 +3,7 @@
 <mapper namespace="com.java.dogle.sample.SampleMapper">
 
 
-	<select id="sample1">
+	<select id="sample1" resultType="_int">
 		SELECT 1
 		FROM DUAL
 	</select>

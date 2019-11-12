@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.java.dogle.sample.SampleMapper;
+import com.java.dogle.mapper.sample.SampleMapper;
 
 @RestController
 public class SampleController {

@@ -5,7 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan(basePackages = "com.java.dogle.sample")
+//매퍼 패키지가 생성될 때마다 여기에 추가.
+@MapperScan(basePackages = "com.java.dogle.mapper.sample")
 public class DogleApplication {
 
 	public static void main(String[] args) {

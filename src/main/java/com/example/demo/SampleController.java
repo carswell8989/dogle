@@ -14,10 +14,10 @@ public class SampleController {
 	
 	private static final Logger LOGGER = LogManager.getLogger(SampleController.class);
 	
-	@Autowired
+	@Deprecated
 	private SampleMapper sampleMapper;
 	
-	@RequestMapping("/sample1")
+	@Deprecated
 	public String sample1() {
 		
 		int result = sampleMapper.sample1();

@@ -1,8 +1,6 @@
 package com.java.dogle.util;
 
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 import com.example.demo.DogleException;
 
 /**

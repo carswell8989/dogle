@@ -3,6 +3,8 @@ package com.java.dogle.util;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import com.example.demo.DogleException;
+
 /**
  * 
  * 단방향 암호화 SHA256 util 클래스
@@ -11,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class SHA256Util {
 
-	public String encrpty (String planeText) {
+	public String encrpty (String planeText) throws DogleException {
 		
 		String result="";
 		
@@ -29,8 +31,7 @@ public class SHA256Util {
 			result = hexString.toString();
             
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			new DogleException(e.getMessage());
 		}
 		
 		return result;

@@ -12,6 +12,7 @@ EXECUTE stmt;
 DEALLOCATE PREPARE stmt;
 
 
+-- 테이블 순서는 관계를 고려하여 한 번에 실행해도 에러가 발생하지 않게 정렬되었습니다.
 
 -- HOTEL Table Create SQL
 CREATE TABLE HOTEL
@@ -101,7 +102,7 @@ ALTER TABLE PET_INFO
 -- HOTEL Table Create SQL
 CREATE TABLE PET_PIC
 (
-    `FILE_NO`    INT            NOT NULL        AUTO_INCREMENT COMMENT '파일번호', 
+    `FILE_NO`    INT            NULL        AUTO_INCREMENT COMMENT '파일번호', 
     `PET_NO`     INT            NULL        COMMENT '애견 일련번호', 
     `FILE_DIR`   VARCHAR(45)    NOT NULL    COMMENT '파일경로', 
     `FILE_SIZE`  VARCHAR(45)    NOT NULL    COMMENT '파일사이즈', 
@@ -126,6 +127,7 @@ CREATE TABLE HOTEL_REVIEW
     `DETAIL_NO`       INT              NULL        COMMENT '객실정보 일련번호', 
     `REVIEW_TITLE`    VARCHAR(45)      NOT NULL    COMMENT '리뷰제목', 
     `REVIEW_CONTENT`  VARCHAR(2000)    NOT NULL    COMMENT '리뷰내용', 
+    `DEL_YN`          CHAR(1)          NULL        COMMENT '삭제여부', 
     PRIMARY KEY (REVIEW_NO)
 );
 
@@ -185,6 +187,7 @@ CREATE TABLE FREE_BOARD
     `TITLE`      VARCHAR(45)    NULL        COMMENT '제목', 
     `CONTENT`    VARCHAR(45)    NULL        COMMENT '내용', 
     `REG_DATE`   DATETIME       NULL        COMMENT '등록일', 
+    `DEL_YN`     CHAR(1)        NULL        COMMENT '삭제여부', 
     PRIMARY KEY (TEXT_NO)
 );
 
@@ -205,6 +208,7 @@ CREATE TABLE FREE_BOARD_REPLY
     `CONTENT`      VARCHAR(500)    NOT NULL    COMMENT '댓글내용', 
     `REG_DATE`     VARCHAR(45)     NOT NULL    COMMENT '등록일', 
     `DEPTH`        VARCHAR(45)     NOT NULL    COMMENT '댓글깊이', 
+    `DEL_YN`       CHAR(1)         NULL        COMMENT '삭제여부', 
     PRIMARY KEY (REPLY_NO)
 );
 
@@ -361,23 +365,6 @@ ALTER TABLE PRMOTION COMMENT '프로모션';
 
 
 -- HOTEL Table Create SQL
-CREATE TABLE HOTEL_POSSIBLE_INFO
-(
-    `HOTEL_NO`       INT             NOT NULL    COMMENT '호텔번호', 
-    `PSB_KIND_CODE`  VARCHAR(45)     NOT NULL    COMMENT '가능 종류 코드', 
-    `PSB_YN_CODE`    VARCHAR(45)     NOT NULL    COMMENT '가능 여부', 
-    `DESC`           VARCHAR(100)    NULL        COMMENT '상세', 
-    PRIMARY KEY (HOTEL_NO, PSB_KIND_CODE)
-);
-
-ALTER TABLE HOTEL_POSSIBLE_INFO COMMENT '애완동물 이용 가능 정보(공통코드로 관리)';
-
-ALTER TABLE HOTEL_POSSIBLE_INFO
-    ADD CONSTRAINT FK_HOTEL_POSSIBLE_INFO_HOTEL_NO_HOTEL_HOTEL_NO FOREIGN KEY (HOTEL_NO)
-        REFERENCES HOTEL (HOTEL_NO) ON DELETE RESTRICT ON UPDATE RESTRICT;
-
-
--- HOTEL Table Create SQL
 CREATE TABLE PAYMENT
 (
     `PAY_NO`         INT               NOT NULL    AUTO_INCREMENT COMMENT '결제번호', 
@@ -429,9 +416,10 @@ CREATE TABLE NOTICE
     `NOTICE_NO`  INT              NOT NULL    AUTO_INCREMENT COMMENT '공지사항번호', 
     `MEMBER_ID`  VARCHAR(45)      NOT NULL    COMMENT '관리자 ID', 
     `TITLE`      VARCHAR(45)      NOT NULL    COMMENT '제목', 
-    `CONTENT`    VARCHAR(2000)    NOT NULL    COMMENT '내용', 
+    `CONTENT`    VARCHAR(200O)    NOT NULL    COMMENT '내용', 
     `TOP_YN`     CHAR(1)          NOT NULL    COMMENT '최상단 노출여부', 
     `REG_DATE`   DATETIME         NOT NULL    COMMENT '등록일', 
+    `DEL_YN`     CHAR(1)          NULL        COMMENT '삭제여부', 
     PRIMARY KEY (NOTICE_NO)
 );
 

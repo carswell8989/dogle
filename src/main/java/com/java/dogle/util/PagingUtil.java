@@ -55,7 +55,7 @@ public class PagingUtil {
 		
 		pageVo.setOffset(offset);
 		pageVo.setTotalPage(totalPage);
-		
+		pageVo.setLimit(pageRow);
 		
 	}
 	

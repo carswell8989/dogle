@@ -20,6 +20,8 @@ public class PageVO extends CommonVO {
 	
 	private int totalPage; //마지막 페이지
 
+	private int limit; //offset부터 가져올 글의 수
+	
 	public int getPageRow() {
 		return pageRow;
 	}
@@ -58,6 +60,14 @@ public class PageVO extends CommonVO {
 
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
+	}
+
+	public int getLimit() {
+		return limit;
+	}
+
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 
 	

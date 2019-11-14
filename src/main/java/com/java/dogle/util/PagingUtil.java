@@ -24,7 +24,7 @@ public class PagingUtil {
 		}
 		
 		if(pageVo.getTotal() <= 0) {
-			throw new DogleException("작성된 글이 없습니다.");
+			throw new DogleException("작성된 글이 없습니다.(total : 0)");
 		}
 		
 		

@@ -18,7 +18,7 @@ public class PageVO extends CommonVO {
 	
 	private int offset; //쿼리에서 사용할 offset (현재 페이지에서 보여줄 글의 인덱스)
 	
-	private int lastPage; //마지막 페이지
+	private int totalPage; //마지막 페이지
 
 	public int getPageRow() {
 		return pageRow;
@@ -52,13 +52,15 @@ public class PageVO extends CommonVO {
 		this.offset = offset;
 	}
 
-	public int getLastPage() {
-		return lastPage;
+	public int getTotalPage() {
+		return totalPage;
 	}
 
-	public void setLastPage(int lastPage) {
-		this.lastPage = lastPage;
+	public void setTotalPage(int totalPage) {
+		this.totalPage = totalPage;
 	}
+
+	
 	
 	
 	

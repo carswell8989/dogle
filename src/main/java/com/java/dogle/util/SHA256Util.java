@@ -11,7 +11,7 @@ import com.example.demo.DogleException;
 
 public class SHA256Util {
 
-	public String encrpty (String planeText) throws DogleException {
+	public static String encrpty (String planeText) throws DogleException {
 		
 		String result="";
 		

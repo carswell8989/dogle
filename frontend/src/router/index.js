@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/views/HelloWorld'
-import Sample from '@/views/sample1/Sample'
+import MainIndex from '@/views/Main'
+import HotelIndex from '@/views/HotelSearch/Index'
+import BoardIndex from '@/views/Board/Index'
+import MyPageIndex from '@/views/MyPage/Index'
 
 Vue.use(Router)
 
@@ -10,13 +12,23 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
+      name: 'MainIndex',
+      component: MainIndex
     },
     {
-      path: '/sample1',
-      name: 'Sample',
-      component: Sample
+      path: '/hotelSrh',
+      name: 'HotelIndex',
+      component: HotelIndex
+    },
+    {
+      path: '/board',
+      name: 'BoardIndex',
+      component: BoardIndex
+    },
+    {
+      path: '/myPage',
+      name: 'MyPageIndex',
+      component: MyPageIndex
     }
   ]
 })

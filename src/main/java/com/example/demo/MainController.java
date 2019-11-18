@@ -54,6 +54,7 @@ public class MainController {
 	
 	
 	/** 공지사항*/
+	@CrossOrigin(origins="http://localhost:9091")  // --크로스도메인 문제를 해결하기위해 프론트엔드 주소를 입력한다.
 	@RequestMapping("/board")
 	public String board() {
 		
@@ -66,6 +67,7 @@ public class MainController {
 	
 	
 	/** 마이페이지*/
+	@CrossOrigin(origins="http://localhost:9091")  // --크로스도메인 문제를 해결하기위해 프론트엔드 주소를 입력한다.
 	@RequestMapping("/myPage")
 	public String mypage() {
 		

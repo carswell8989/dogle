@@ -1,5 +1,8 @@
 package com.example.demo;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.java.dogle.common.FileVO;
 import com.java.dogle.mapper.sample.SampleMapper;
+import com.java.dogle.util.FileUtil;
 
 /**
  * 
@@ -77,5 +82,28 @@ public class MainController {
 
 		return "mypage";
 	}
+	
+	
+	
+	@RequestMapping("/fileTest")
+	public String fileTest() throws DogleException, IOException {
+		
+		FileVO fileVo = new FileVO();
+		//src/main/resource/ 부터 경로지정.
+		fileVo.setFileDir("files/temp");
+		fileVo.setFileName("test.txt");
+		
+		//파일 가져오는 유틸
+		FileVO result = FileUtil.getFile(fileVo);
+		
+		//파일 읽는 유틸(텍스트인 경우)
+		String test = FileUtil.readFileString(result);
+		
+		
+		
+		return test;
+		
+	}
+	
 	
 }

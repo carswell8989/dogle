@@ -11,8 +11,9 @@ import com.example.demo.DogleException;
  * 
  * 
  * Date 관련 유틸 클래스.
- * 
- * 
+ * 1. getFormatyyyyMMdd() Date객체를 yyyyMMdd로 리턴
+ * 2. getFormatyyyyMMdd2() Date객체를 yyyy-MM-dd로 리턴
+ * 3. getDiffDate() 두 날짜간의 차이(일수)를 리턴
  */
 
 public class DateUtil {

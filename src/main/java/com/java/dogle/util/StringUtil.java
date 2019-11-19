@@ -5,7 +5,7 @@ import com.example.demo.DogleException;
 /**
  * 
  * String 관련 유틸클래스
- *
+ *1. isNull null 또는 빈스트링 체크
  */
 
 

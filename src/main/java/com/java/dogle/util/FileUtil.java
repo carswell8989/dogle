@@ -17,6 +17,8 @@ import com.java.dogle.common.FileVO;
   * 
   * 해당 클래스를 사용하기에 앞서, 파일은 src/main/resources 경로에 있어야 합니다.
   *
+  *1. getFile 파일을 읽어와서 리턴
+  *2. readFileString 특정 파일의 내용을 읽어서 리턴
   */
 
 

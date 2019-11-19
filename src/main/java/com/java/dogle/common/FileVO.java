@@ -4,13 +4,13 @@ import java.io.File;
 
 public class FileVO extends CommonVO {
 
-	private String fileDir;
+	private String fileDir; // 파일경로
 	
-	private String fileName;
+	private String fileName; // 파일명(확장자포함)
 	
-	private String fileSize;
-
-	private File file;
+	private String fileSize; //파일사이즈
+ 
+	private File file; // 파일
 	
 	
 	

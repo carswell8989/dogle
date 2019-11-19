@@ -37,6 +37,18 @@ public class FileUtil {
 	public static FileVO getFile(FileVO fileVo) throws DogleException {
 		
 		
+		
+		if(null == fileVo.getFileDir() || "".equals(fileVo.getFileDir())) {
+			throw new DogleException("file directory is null");
+		}
+		
+		if(null == fileVo.getFileName() || "".equals(fileVo.getFileName())) {
+			throw new DogleException("file name is null");
+		}
+		
+		
+		
+		
 		//Resource resource = new ClassPathResource("files/temp/test.txt");
 		Resource resource = new ClassPathResource(fileVo.getFileDir()+"/"+fileVo.getFileName());
 		

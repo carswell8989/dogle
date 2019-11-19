@@ -15,8 +15,11 @@ public class StringUtil {
 	
 	/**
 	 * 
-	 * NULL 또는 ""(빈 스트링)인 경우 true 리턴.
+	 * @param String
+	 * @return boolean
+	 * @throws DogleException
 	 * 
+	 * 파라미터 스트링이 null 또는 ""인 경우 true , 아니면 false리턴
 	 */
 	public static boolean isNull(String str) throws DogleException {
 		

@@ -32,7 +32,7 @@ public class FileUtil {
 	 * @return FileVO
 	 * @throws DogleException
 	 * 
-	 * 파일객체(파일 경로, 파일명)을 보내면, 파일을 찾아서 객체에 담아 리턴
+	 *  파일객체(파일 경로, 파일명)을 보내면, 파일을 찾아서 객체에 담아 리턴
 	 */
 	
 	public static FileVO getFile(FileVO fileVo) throws DogleException {

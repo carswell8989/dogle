@@ -7,6 +7,9 @@ public class PagingUtil {
 
 
 	/**
+	 * @param PageVO
+	 * @return void(파라미터 객체에 리턴)
+	 * @throws DogleException
 	 * 
 	 * 객체를 보내면 해당 객체에 
 	 * 총 페이지의 수

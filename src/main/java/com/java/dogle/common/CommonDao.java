@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * 
  * 
  * @author jinkyu
+ * 
+ * 2019.11.19 mapper를 인터페이스를 사용하기 때문에, 해당 클래스 사용하지 않습니다.
  *
  */
 

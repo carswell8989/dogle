@@ -1,14 +1,32 @@
 <template>
   <div class="main">
-    <h1>Dogle</h1>
-    <h2>Dogle - Main Page</h2>
-    <img src="../assets/logo.png" alt="doggle_logo">
+    <h1>DOGLE</h1>
+    <img src="../assets/logo.png" alt="doggle_logo" />
+    <form class="login-form" @submit.prevent="login">
+      <el-input placeholder="아이디를 입력하세요" v-model="id" clearable class="user-input"></el-input>
+      <el-input placeholder="비밀번호를 입력하세요" v-model="password" show-password class="user-input"></el-input>
+      <button type="submit" class="btn-login">로그인</button>
+    </form>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'MainIndex'
+  name: 'MainIndex',
+  data () {
+    return {
+      id: '',
+      password: ''
+    }
+  },
+  methods: {
+    login () {
+      if (this.id === 'test' && this.password === '1234') {
+        console.log('인증성공!!!')
+        // this.$router.replace(this.$route.query.redirect || '/')
+      }
+    }
+  }
 }
 </script>
 
@@ -28,5 +46,16 @@ li {
 }
 a {
   color: #42b983;
+}
+.main {
+  width: 30%;
+  margin-left: 35%;
+}
+.main .login-form .user-input {
+  margin: 5px 0;
+}
+.main .login-form .btn-login {
+  width: 100%;
+  margin-top: 20px;
 }
 </style>

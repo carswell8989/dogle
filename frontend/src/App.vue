@@ -2,7 +2,7 @@
   <div id="app">
     <el-menu
       :default-active="activeIndex"
-      class="el-menu-demo"
+      class="el-menu-demo dogle-nav"
       mode="horizontal"
       @select="handleSelect"
     >
@@ -16,19 +16,21 @@
         <router-link to="/board">공지사항</router-link>
       </el-menu-item>
       <el-submenu index="4">
-      <template slot="title"><router-link to="/myPage">마이페이지</router-link></template>
-      <el-menu-item index="2-1">item one</el-menu-item>
-      <el-menu-item index="2-2">item two</el-menu-item>
-      <el-menu-item index="2-3">item three</el-menu-item>
-      <el-submenu index="2-4">
-        <template slot="title">item four</template>
-          <el-menu-item index="2-4-1">item one</el-menu-item>
-          <el-menu-item index="2-4-2">item two</el-menu-item>
-          <el-menu-item index="2-4-3">item three</el-menu-item>
-      </el-submenu>
+        <template slot="title">
+          <router-link to="/myPage">마이페이지</router-link>
+        </template>
+        <el-menu-item index="4-1">item one</el-menu-item>
+        <el-menu-item index="4-2">item two</el-menu-item>
+        <el-menu-item index="4-3">item three</el-menu-item>
+        <el-submenu index="4-4">
+          <template slot="title">item four</template>
+          <el-menu-item index="4-4-1">item one</el-menu-item>
+          <el-menu-item index="4-4-2">item two</el-menu-item>
+          <el-menu-item index="4-4-3">item three</el-menu-item>
+        </el-submenu>
       </el-submenu>
     </el-menu>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -37,20 +39,18 @@ export default {
   name: 'App',
   data () {
     return {
-      activeIndex: "1"
+      activeIndex: '1'
     }
   },
   methods: {
     handleSelect (key, keyPath) {
-      console.log(key, keyPath);
+      console.log(key, keyPath)
     }
   }
 }
 </script>
 
 <style>
-@import url("//unpkg.com/element-ui@2.12.0/lib/theme-chalk/index.css");
-
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -60,5 +60,15 @@ export default {
   margin-top: 60px;
 }
 
-#app a { display: inline-block; text-decoration: none; width: 100px; font-size: 15px;}
+#app a {
+  display: inline-block;
+  text-decoration: none;
+  width: 100px;
+  font-size: 12px;
+}
+#app .dogle-nav .btn-login {
+  float: right;
+}
+
+#app .dogle-nav .btn-login a {color: #fff; display: inline-block;}
 </style>

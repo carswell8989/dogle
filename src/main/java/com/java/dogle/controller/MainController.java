@@ -114,7 +114,8 @@ public class MainController {
 		
 	}
 	
-	@CrossOrigin(origins="http://localhost:9091")  // --�겕濡쒖뒪�룄硫붿씤 臾몄젣瑜� �빐寃고븯湲곗쐞�빐 �봽濡좏듃�뿏�뱶 二쇱냼瑜� �엯�젰�븳�떎.
+	/**인증페이지 */
+	@CrossOrigin(origins="http://localhost:9091")  
 	@RequestMapping("/secured")
 	public String getSecured() {
 			

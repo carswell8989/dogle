@@ -10,14 +10,7 @@ import Protected from '@/views/Protected'
 
 Vue.use(Router)
 
-const requireAuth = () => (to, from, next) => {
-  if (store.getters.getAccessToken !== null) {
-    return next()
-  }
-  next('/login')
-}
-
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -29,19 +22,25 @@ export default new Router({
       path: '/hotelSrh',
       name: 'HotelIndex',
       component: HotelIndex,
-      beforeEnter: requireAuth()
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/board',
       name: 'BoardIndex',
       component: BoardIndex,
-      beforeEnter: requireAuth()
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/myPage',
       name: 'MyPageIndex',
       component: MyPageIndex,
-      beforeEnter: requireAuth()
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/login',
@@ -51,7 +50,32 @@ export default new Router({
     {
       path: '/protected',
       name: 'Protected',
-      component: Protected
-    }
+      component: Protected,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    // otherwise redirect to home
+    { path: '*', redirect: '/' }
   ]
 })
+
+// beforeEach()의 콜백 함수에 사용자 인증 여부를 체크하는 로직을 추가
+router.beforeEach(function (to, from, next) {
+  // to : 이동할 url
+  // from : 현재 url
+  // next : to에서 지정한 url로 이동하기 위해 꼭 호출해야 하는 함수
+  if (to.matched.some(function (routeInfo) {
+    return routeInfo.meta.requiresAuth
+  })) {
+    if (store.getters.getAccessToken !== null) {
+      return next()
+    } else {
+      next('/login')
+    }
+  } else {
+    next()
+  }
+})
+
+export default router

@@ -35,19 +35,19 @@ public class MainController {
 	@Autowired
 	private SampleMapper sampleMapper;
 	
-	@Autowired
-	private FileUtil fileUtil;
+	//@Autowired
+	//private FileUtil fileUtil;
 	
 	
-//	@RequestMapping("/sample1")
-//	public String sample1() {
-//		
-//		int result = sampleMapper.sample1();
-//
-//		LOGGER.info("sample1 ::: {}", result);
-//
-//		return "test";
-//	}
+	@RequestMapping("/sample1")
+	public String sample1() {
+		
+		int result = sampleMapper.sample1();
+
+		LOGGER.info("sample1 ::: {}", result);
+
+		return "test";
+	}
 
 	
 	/** 호텔 검색*/
@@ -99,15 +99,15 @@ public class MainController {
 		fileVo.setFileName("test.txt");
 		
 		//파일 가져오는 유틸
-		FileVO result = fileUtil.getFile(fileVo);
+		//FileVO result = fileUtil.getFile(fileVo);
 		
 		//파일 읽는 유틸(텍스트인 경우)
-		String test = fileUtil.readFileString(result);
+		//String test = fileUtil.readFileString(result);
 
 		//upload에 파일저장.
 		//fileUtil.saveFileLocal(result);
 		
-		return test;
+		return "temp";
 		
 	}
 	

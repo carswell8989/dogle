@@ -36,18 +36,15 @@ public class FileUtil {
 	
 	 private final Path fileLocation;
 	
-	 @Autowired
-	 public FileUtil(FileUploadProperties prop) throws DogleException {
-	    
-		 this.fileLocation = Paths.get(prop.getUploadDir())
-	              .toAbsolutePath().normalize();
-	        
-	     try {
-	         Files.createDirectories(this.fileLocation);
-	     }catch(Exception e) {
-	         throw new DogleException(e.getMessage());
-	     }
-	  }
+	
+	  @Autowired public FileUtil(FileUploadProperties prop) throws DogleException {
+	  
+	  this.fileLocation = Paths.get(prop.getUploadDir())
+	  .toAbsolutePath().normalize();
+	  
+	  try { Files.createDirectories(this.fileLocation); }catch(Exception e) { throw
+	  new DogleException(e.getMessage()); } }
+	 
 
 
 

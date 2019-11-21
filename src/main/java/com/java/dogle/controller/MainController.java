@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.java.dogle.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.DogleException;
 import com.java.dogle.common.FileVO;
-import com.java.dogle.mapper.sample.SampleMapper;
+import com.java.dogle.dao.SampleDao;
 import com.java.dogle.util.FileUtil;
 
 /**
@@ -31,10 +32,13 @@ public class MainController {
 	private static final Logger LOGGER = LogManager.getLogger(MainController.class);
 	
 	public static final String HELLO_TEXT = "Hello from Spring Boot Backend!";
-	public static final String SECURED_TEXT = "Hello from the secured resource!";
-    
+	
+	/*
+	 * @Autowired private SampleMapper sampleMapper;
+	 */
+	
 	@Autowired
-	private SampleMapper sampleMapper;
+	private SampleDao sampleDao;
 	
 	//@Autowired
 	//private FileUtil fileUtil;
@@ -43,8 +47,13 @@ public class MainController {
 	@RequestMapping("/sample1")
 	public String sample1() {
 		
-		int result = sampleMapper.sample1();
+		//인터페이스 방식
+		//int result = sampleMapper.sample1();
 
+		//dao 방식
+		int result = sampleDao.sample1();
+		
+		
 		LOGGER.info("sample1 ::: {}", result);
 
 		return "test";
@@ -56,9 +65,7 @@ public class MainController {
 	@RequestMapping("/hotelSrh")
 	public String hotelSrh() {
 		
-		int result = sampleMapper.sample1();
-
-		LOGGER.info("hotelSrh ::: {}", result);
+	
 
 		return HELLO_TEXT;
 	}
@@ -69,9 +76,7 @@ public class MainController {
 	@RequestMapping("/board")
 	public String board() {
 		
-		int result = sampleMapper.sample1();
-
-		LOGGER.info("board ::: {}", result);
+	
 
 		return "board";
 	}
@@ -81,10 +86,7 @@ public class MainController {
 	@CrossOrigin(origins="http://localhost:9091")  // --크로스도메인 문제를 해결하기위해 프론트엔드 주소를 입력한다.
 	@RequestMapping("/myPage")
 	public String mypage() {
-		
-		int result = sampleMapper.sample1();
 
-		LOGGER.info("mypage ::: {}", result);
 
 		return "mypage";
 	}
@@ -112,13 +114,5 @@ public class MainController {
 		
 	}
 	
-	/** 로그인*/
-	@CrossOrigin(origins="http://localhost:9091")  // --크로스도메인 문제를 해결하기위해 프론트엔드 주소를 입력한다.
-	@RequestMapping("/secured")
-	public String getSecured() {
-			
-		LOGGER.info("GET successfully called on /secured resource");
-		
-	    return SECURED_TEXT;
-	}
+	
 }

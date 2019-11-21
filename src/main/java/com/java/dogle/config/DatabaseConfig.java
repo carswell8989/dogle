@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.java.dogle.config;
 
 import javax.sql.DataSource;
 
@@ -17,7 +17,7 @@ public class DatabaseConfig {
 	
 		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean(); 
 		sqlSessionFactory.setDataSource(datasource); 
-		sqlSessionFactory.setTypeAliasesPackage("com.java.dogle.mapper"); 
+		//sqlSessionFactory.setTypeAliasesPackage("com.java.dogle.mapper"); 
 		sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/**/*.xml")); return sqlSessionFactory.getObject(); 
 	}
 	

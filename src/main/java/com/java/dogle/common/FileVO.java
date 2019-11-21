@@ -2,6 +2,8 @@ package com.java.dogle.common;
 
 import java.io.File;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class FileVO extends CommonVO {
 
 	private String fileDir; // 파일경로
@@ -12,8 +14,18 @@ public class FileVO extends CommonVO {
  
 	private File file; // 파일
 	
+	private MultipartFile mutilpartFile; //업로드 파일.
 	
 	
+	
+	public MultipartFile getMutilpartFile() {
+		return mutilpartFile;
+	}
+
+	public void setMutilpartFile(MultipartFile mutilpartFile) {
+		this.mutilpartFile = mutilpartFile;
+	}
+
 	public String getFileDir() {
 		return fileDir;
 	}

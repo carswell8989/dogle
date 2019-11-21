@@ -4,12 +4,21 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.DogleException;
 import com.java.dogle.common.FileVO;
+import com.java.dogle.config.FileUploadProperties;
 
 
  /**
@@ -22,8 +31,24 @@ import com.java.dogle.common.FileVO;
 
 
 
-
+@Service("fileUtil")
 public class FileUtil {
+	
+	 private final Path fileLocation;
+	
+	 @Autowired
+	 public FileUtil(FileUploadProperties prop) throws DogleException {
+	    
+		 this.fileLocation = Paths.get(prop.getUploadDir())
+	              .toAbsolutePath().normalize();
+	        
+	     try {
+	         Files.createDirectories(this.fileLocation);
+	     }catch(Exception e) {
+	         throw new DogleException(e.getMessage());
+	     }
+	  }
+
 
 
 	/**
@@ -35,7 +60,7 @@ public class FileUtil {
 	 *  파일객체(파일 경로, 파일명)을 보내면, 파일을 찾아서 객체에 담아 리턴
 	 */
 	
-	public static FileVO getFile(FileVO fileVo) throws DogleException {
+	public FileVO getFile(FileVO fileVo) throws DogleException {
 		
 		
 		
@@ -78,7 +103,7 @@ public class FileUtil {
 	 * 
 	 */
 	
-	public static String readFileString(FileVO fileVo) throws DogleException, IOException {
+	public String readFileString(FileVO fileVo) throws DogleException, IOException {
 		
 		String str = "";
 		
@@ -101,6 +126,14 @@ public class FileUtil {
          str = buffer.toString();
 		
 		return str;
+	}
+	
+	public void saveFileLocal(FileVO fileVo) throws DogleException, IOException {
+		
+		Path targetLocation = this.fileLocation.resolve(fileVo.getFileName());
+        
+        Files.copy(fileVo.getMutilpartFile().getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+		
 	}
 	
 }

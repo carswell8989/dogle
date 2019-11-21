@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.java.dogle.common.FileVO;
 import com.java.dogle.mapper.sample.SampleMapper;
@@ -33,6 +34,10 @@ public class MainController {
 	
 	@Autowired
 	private SampleMapper sampleMapper;
+	
+	@Autowired
+	private FileUtil fileUtil;
+	
 	
 //	@RequestMapping("/sample1")
 //	public String sample1() {
@@ -94,12 +99,13 @@ public class MainController {
 		fileVo.setFileName("test.txt");
 		
 		//파일 가져오는 유틸
-		FileVO result = FileUtil.getFile(fileVo);
+		FileVO result = fileUtil.getFile(fileVo);
 		
 		//파일 읽는 유틸(텍스트인 경우)
-		String test = FileUtil.readFileString(result);
-		
-		
+		String test = fileUtil.readFileString(result);
+
+		//upload에 파일저장.
+		//fileUtil.saveFileLocal(result);
 		
 		return test;
 		

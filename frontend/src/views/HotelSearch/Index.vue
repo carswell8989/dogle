@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import api from '../controller/api'
+import api from '../backend-api'
 
 export default {
   name: 'HotelIndex',

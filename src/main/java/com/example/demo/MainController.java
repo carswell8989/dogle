@@ -31,7 +31,8 @@ public class MainController {
 	private static final Logger LOGGER = LogManager.getLogger(MainController.class);
 	
 	public static final String HELLO_TEXT = "Hello from Spring Boot Backend!";
-	
+	public static final String SECURED_TEXT = "Hello from the secured resource!";
+    
 	@Autowired
 	private SampleMapper sampleMapper;
 	
@@ -111,5 +112,13 @@ public class MainController {
 		
 	}
 	
-	
+	/** 로그인*/
+	@CrossOrigin(origins="http://localhost:9091")  // --크로스도메인 문제를 해결하기위해 프론트엔드 주소를 입력한다.
+	@RequestMapping("/secured")
+	public String getSecured() {
+			
+		LOGGER.info("GET successfully called on /secured resource");
+		
+	    return SECURED_TEXT;
+	}
 }

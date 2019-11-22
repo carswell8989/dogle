@@ -42,6 +42,8 @@ public class CommonDao extends SqlSessionDaoSupport {
 		 this.nameSpace = nameSpace;
 	 }
 	 
+
+	 
 	 //파라미터가 없는 selectOne
 	 public <T> T selectOne(String queryId) {
 		 

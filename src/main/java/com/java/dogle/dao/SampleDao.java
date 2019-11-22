@@ -1,21 +1,29 @@
 package com.java.dogle.dao;
 
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import com.java.dogle.common.CommonDao;
 
 @Repository
-public class SampleDao {
-
-	private final String  NAMESPACE = "SampleDao.";
+public class SampleDao extends CommonDao {
 	
-	@Autowired
-	private SqlSession sqlSession;
-
-	public int sample1(){
-		return sqlSession.selectOne(NAMESPACE + "sample1");
+	
+	public SampleDao() {
+		this.nameSpace = "SampleDao";
 	}
 	
+
+	/*
+	 * private final String NAMESPACE = "SampleDao.";
+	 * 
+	 * @Autowired private SqlSession sqlSession;
+	 * 
+	 * public int sample1(){ return sqlSession.selectOne(NAMESPACE + "sample1"); }
+	 */
+	
+	//공통 dao 상속 처리 방식으로 사용.
+	public int sample1() {
+		return selectOne("sample1");
+	}
 	
 	
 }

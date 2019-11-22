@@ -7,6 +7,7 @@ import BoardIndex from '@/views/Board/Index'
 import MyPageIndex from '@/views/MyPage/Index'
 import Login from '@/views/Login'
 import Protected from '@/views/Protected'
+import SignUp from '@/views/SignUp/Index'
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+    },
+    {
+      path: '/SignUp',
+      name: 'SignUp',
+      component: SignUp
     },
     // otherwise redirect to home
     { path: '*', redirect: '/' }

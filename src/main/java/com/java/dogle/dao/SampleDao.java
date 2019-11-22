@@ -6,7 +6,7 @@ import com.java.dogle.common.CommonDao;
 @Repository
 public class SampleDao extends CommonDao {
 	
-	
+	//네임스페이스만 지정 xml
 	public SampleDao() {
 		this.nameSpace = "SampleDao";
 	}

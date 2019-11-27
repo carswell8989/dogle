@@ -102,15 +102,15 @@ public class MainController {
 		fileVo.setFileName("test.txt");
 		
 		//파일 가져오는 유틸
-		//FileVO result = fileUtil.getFile(fileVo);
+		FileVO result = FileUtil.getFile(fileVo);
 		
 		//파일 읽는 유틸(텍스트인 경우)
-		//String test = fileUtil.readFileString(result);
+	    String test = FileUtil.readFileString(result);
 
 		//upload에 파일저장.
-		//fileUtil.saveFileLocal(result);
+		FileUtil.saveFileLocal(result);
 		
-		return "temp";
+		return test;
 		
 	}
 	

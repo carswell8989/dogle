@@ -2,8 +2,10 @@ package com.java.dogle.util;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,6 +14,7 @@ import java.nio.file.StandardCopyOption;
 import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamSource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,15 +37,15 @@ import com.java.dogle.config.FileUploadProperties;
 @Service("fileUtil")
 public class FileUtil {
 	
-	 private final Path fileLocation;
+	 private static Path fileLocation;
 	
 	
 	  @Autowired public FileUtil(FileUploadProperties prop) throws DogleException {
 	  
-	  this.fileLocation = Paths.get(prop.getUploadDir())
+	  fileLocation = Paths.get(prop.getUploadDir())
 	  .toAbsolutePath().normalize();
 	  
-	  try { Files.createDirectories(this.fileLocation); }catch(Exception e) { throw
+	  try { Files.createDirectories(fileLocation); }catch(Exception e) { throw
 	  new DogleException(e.getMessage()); } }
 	 
 
@@ -57,7 +60,7 @@ public class FileUtil {
 	 *  파일객체(파일 경로, 파일명)을 보내면, 파일을 찾아서 객체에 담아 리턴
 	 */
 	
-	public FileVO getFile(FileVO fileVo) throws DogleException {
+	public static FileVO getFile(FileVO fileVo) throws DogleException {
 		
 		
 		
@@ -100,7 +103,7 @@ public class FileUtil {
 	 * 
 	 */
 	
-	public String readFileString(FileVO fileVo) throws DogleException, IOException {
+	public static String readFileString(FileVO fileVo) throws DogleException, IOException {
 		
 		String str = "";
 		
@@ -125,11 +128,17 @@ public class FileUtil {
 		return str;
 	}
 	
-	public void saveFileLocal(FileVO fileVo) throws DogleException, IOException {
+	public static void saveFileLocal(FileVO fileVo) throws DogleException, IOException {
 		
-		Path targetLocation = this.fileLocation.resolve(fileVo.getFileName());
-        
-        Files.copy(fileVo.getMutilpartFile().getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+		/**
+		 * //저장경로 C:/project/dogle/src/main/resources/files/upload
+		 */
+	
+		Path targetLocation = fileLocation.resolve(fileVo.getFileName());
+		//일반파일
+		Files.copy(new FileInputStream(fileVo.getFile()), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+        //multipart
+		//Files.copy(fileVo.getMutilpartFile().getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 		
 	}
 	

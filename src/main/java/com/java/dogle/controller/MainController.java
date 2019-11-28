@@ -15,7 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.DogleException;
 import com.java.dogle.common.FileVO;
 import com.java.dogle.dao.SampleDao;
+import com.java.dogle.service.TestService;
 import com.java.dogle.util.FileUtil;
+
 
 /**
  * 
@@ -37,7 +39,7 @@ public class MainController {
 	 * @Autowired private SampleMapper sampleMapper;
 	 */
 	
-	@Autowired
+	
 	private SampleDao sampleDao;
 	
 	//@Autowired
@@ -52,7 +54,6 @@ public class MainController {
 
 		//dao 방식
 		int result = sampleDao.sample1();
-		
 		
 		LOGGER.info("sample1 ::: {}", result);
 

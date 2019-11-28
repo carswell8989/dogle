@@ -12,7 +12,7 @@ import com.java.dogle.config.FileUploadProperties;
 
 @SpringBootApplication
 //@Autowired 어노테이션으로 불러오는 객체들에 대한 패키지를 정의해야한다.
-@ComponentScan(basePackages = {"com.java.dogle.config", "com.java.dogle.util", "com.java.dogle.controller", "com.java.dogle.dao"})
+@ComponentScan(basePackages = {"com.java.dogle.config", "com.java.dogle.util", "com.java.dogle.controller", "com.java.dogle.dao","com.java.dogle.service"})
 
 
 //매퍼 패키지가 생성될 때마다 여기에 추가.

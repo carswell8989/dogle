@@ -15,15 +15,16 @@
       <form class="login-form" @submit.prevent="callLogin()">
         <el-input placeholder="아이디를 입력하세요" v-model="id" clearable class="user-input"></el-input>
         <el-input placeholder="비밀번호를 입력하세요" v-model="password" show-password class="user-input"></el-input>
-        <el-button type="primary" class="btn-login">로그인</el-button>
-        <el-button icon="el-icon-check" class="btn-join"><router-link to="/signup">회원가입</router-link></el-button>
+        <button type="submit" class="btn-login">로그인</button>
+        <el-button icon="el-icon-check" class="btn-join">
+          <router-link to="/signup">회원가입</router-link>
+        </el-button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-import store from '../store'
 import router from '../router'
 
 export default {
@@ -39,11 +40,13 @@ export default {
   },
   methods: {
     callLogin () {
-      this.errors = []
-      store
-        .dispatch('login', { id: this.id, password: this.password })
+      this.$store.dispatch('login',
+        { id: this.id, password: this.password })
         .then(() => {
           router.push('/Protected')
+        })
+        .catch(error => {
+          console.log('Error: ' + error)
         })
     }
   }

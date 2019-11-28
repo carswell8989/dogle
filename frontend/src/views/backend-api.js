@@ -12,7 +12,7 @@ const AXIOS = axios.create({
 
 export default {
 	hello() {
-		  return AXIOS.get('http://localhost:9090/hotelSrh')
+		return AXIOS.get('http://localhost:9090/hotelSrh')
 	},
 	getSecured(id, password) {
 		return AXIOS.get('http://localhost:9090/secured',{

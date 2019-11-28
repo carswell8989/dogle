@@ -4,7 +4,7 @@ import api from './views/backend-api'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
     loginSucess: false,
     loginError: false,
@@ -67,3 +67,5 @@ export default new Vuex.Store({
     getAccessToken: state => state.accessToken
   }
 })
+
+export default store

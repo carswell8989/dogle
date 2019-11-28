@@ -193,7 +193,7 @@ public class FileUtil {
 		int extensionIndex = fileName.indexOf(".");
 		String extension = fileName.substring(extensionIndex);
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmSSS");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		Date date = new Date();
 		
 		String newFileName = sdf.format(date);

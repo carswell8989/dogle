@@ -3,6 +3,7 @@ package com.java.dogle.controller.member;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ public class MemberController {
 	
 	
 	@RequestMapping("/chkNicknameDup")
-	public long chkNicknameDup(MemberVO param) {
+	public long chkNicknameDup(@RequestBody MemberVO param) {
 		
 		long result = memberService.chkNicknameDup(param);
 		

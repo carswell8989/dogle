@@ -9,7 +9,7 @@ import com.java.dogle.vo.member.MemberVO;
 @Repository
 public class MemberDao extends CommonDao {
 	public MemberDao() {
-		this.nameSpace = "MemberDao";
+		this.nameSpace = "MemberMgmtDao";
 	}
 	
 

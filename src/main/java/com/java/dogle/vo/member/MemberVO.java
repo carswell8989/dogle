@@ -2,13 +2,15 @@ package com.java.dogle.vo.member;
 
 import java.sql.Date;
 
+import com.java.dogle.common.CommonVO;
+
 /**
  * member VO
  * 
  * @author yujin.jeon
  * 
  */
-public class MemberVO {
+public class MemberVO extends CommonVO {
 	String memberId; // 회원아이디
 	String password; // 비밀번호
 	String nickName; // 닉네임

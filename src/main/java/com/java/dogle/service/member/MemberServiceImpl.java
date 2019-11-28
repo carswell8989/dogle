@@ -1,10 +1,12 @@
 package com.java.dogle.service.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.java.dogle.dao.member.MemberDao;
 import com.java.dogle.vo.member.MemberVO;
 
+@Service
 public class MemberServiceImpl implements MemberService{
 
 	@Autowired

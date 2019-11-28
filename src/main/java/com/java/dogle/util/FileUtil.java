@@ -5,20 +5,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.InputStreamSource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
 import com.example.demo.DogleException;
 import com.java.dogle.common.FileVO;
 import com.java.dogle.config.FileUploadProperties;
@@ -128,18 +125,91 @@ public class FileUtil {
 		return str;
 	}
 	
-	public static void saveFileLocal(FileVO fileVo) throws DogleException, IOException {
+	/**
+	 * 
+	 * @param fileVo
+	 * @return String
+	 * @throws DogleException
+	 * @throws IOException
+	 * 
+	 * File 객체를 전송하면, 파일명을 생성하여
+	 * src/main/resources/files/upload 에 업로드 하고 
+	 * 해당 파일명을 리턴한다.
+	 * 
+	 */
+	
+	
+	public static String saveFileLocal(FileVO fileVo) throws DogleException, IOException {
 		
 		/**
 		 * //저장경로 C:/project/dogle/src/main/resources/files/upload
 		 */
+		
+		String fileName = fileVo.getFileName();
+		int extensionIndex = fileName.indexOf(".");
+		String extension = fileName.substring(extensionIndex);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmSSS");
+		Date date = new Date();
+		
+		String newFileName = sdf.format(date);
+		
+		newFileName = newFileName + extension;
+		
+		
+		//만든 파일명으로 해당 파일을 저장.
 	
-		Path targetLocation = fileLocation.resolve(fileVo.getFileName());
+		Path targetLocation = fileLocation.resolve(newFileName);
 		//일반파일
 		Files.copy(new FileInputStream(fileVo.getFile()), targetLocation, StandardCopyOption.REPLACE_EXISTING);
         //multipart
 		//Files.copy(fileVo.getMutilpartFile().getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 		
+		return newFileName;
+	}
+	
+	
+	/**
+	 * 
+	 * @param fileVo
+	 * @return String
+	 * @throws DogleException
+	 * @throws IOException
+	 * 
+	 * MultipartFile 객체를 전송하면, 파일명을 생성하여
+	 * src/main/resources/files/upload 에 업로드 하고 
+	 * 해당 파일명을 리턴한다.
+	 * 
+	 */
+	
+	
+     public static String saveMultiPartFileLocal(FileVO fileVo) throws DogleException, IOException {
+		
+		/**
+		 * //저장경로 C:/project/dogle/src/main/resources/files/upload
+		 */
+		
+		String fileName = fileVo.getFileName();
+		int extensionIndex = fileName.indexOf(".");
+		String extension = fileName.substring(extensionIndex);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmSSS");
+		Date date = new Date();
+		
+		String newFileName = sdf.format(date);
+		
+		newFileName = newFileName + extension;
+		
+		
+		//만든 파일명으로 해당 파일을 저장.
+	
+		Path targetLocation = fileLocation.resolve(newFileName);
+		//일반파일
+		//Files.copy(new FileInputStream(fileVo.getFile()), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+        //multipart
+		Files.copy(fileVo.getMutilpartFile().getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+		
+		return newFileName;
 	}
 	
 }

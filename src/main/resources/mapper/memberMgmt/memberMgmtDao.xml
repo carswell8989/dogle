@@ -3,28 +3,29 @@
 <mapper namespace="MemberMgmtDao">
 	<select id="selectMemberDao001"  parameterType="com.java.dogle.vo.member.MemberVO" resultType="_int">
 		<![CDATA[ /* [memberMgmetDao.xml][select] 조건에 맞는 회원정보 가져오기  -닉네임 중복확인 */ ]]>
-			SELECT COUNT(*) FROM (
-    
+		SELECT COUNT(*) FROM (
 		    SELECT 
-					MEMBER_ID AS memberId, 
-					PASSWORD AS password, 
-					NICK_NAME AS nickName, 
-					MEMBER_NAME AS memberName, 
-					BIRTH AS birth, 
-					CDV AS cdv, 
-					CV AS cv, 
-					CCV AS ccv, 
-					MOBILE_NUMBER AS mobileNumber, 
-					MEMBER_INFO AS memberInfo, 
-					REG_DATE AS regDate, 
-					MANAGER_YN AS managerYn, 
-					WITHDRAW_YN AS withdrawYn, 
-					WITHDRAW_CODE AS withdrawCode, 
-					PERSONAL_INFO_YN AS personalInfoYn, 
-					PERSONAL_INFO_REG_DATE AS personalInfoRegDate
-				FROM MEMBER_
-				WHERE NICK_NAME = #{nickName}
-
-			) as memberTbl;		
+				MEMBER_ID AS memberId, 		/*아이디*/
+				PASSWORD AS password, 		/*비밀번호*/
+				NICK_NAME AS nickName, 		/*닉네임*/
+				MEMBER_NAME AS memberName, 	/*성명*/
+				BIRTH AS birth, 			/*생년월일*/
+				CDV AS cdv, 				/*우편번호*/
+				CV AS cv, 					/*주소*/
+				CCV AS ccv, 				/*주소상세*/
+				MOBILE_NUMBER AS mobileNumber, /*핸드폰번호*/
+				MEMBER_INFO AS memberInfo, 		/*자기소개*/
+				REG_DATE AS regDate, 		/*회원가입일*/
+				MANAGER_YN AS managerYn, 	/*관리자여부*/
+				WITHDRAW_YN AS withdrawYn, /*탈퇴여부*/
+				WITHDRAW_CODE AS withdrawCode, /*탈퇴사유코드*/
+				PERSONAL_INFO_YN AS personalInfoYn, /*개인정보동의여부*/
+				PERSONAL_INFO_REG_DATE AS personalInfoRegDate	/*개인정보동의일자*/
+			FROM MEMBER_
+			WHERE 1=1
+			<if test="nickName != null and nickName != ''">
+			AND NICK_NAME = #{nickName}
+			</if>
+		) as memberTbl;		
 	</select>
 </mapper>

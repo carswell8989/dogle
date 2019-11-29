@@ -22,6 +22,6 @@ export default {
     })
   },
   chkNickNameDup(memberVO) {
-    return axios.post('http://localhost:9090/chkNicknameDup', memberVO)
+    return AXIOS.post('http://localhost:9090/chkNicknameDup', memberVO)
   }
 }

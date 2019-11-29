@@ -1,6 +1,6 @@
 package com.java.dogle.common;
 
-
+import java.io.Serializable;
 
 /**
  * 
@@ -8,6 +8,6 @@ package com.java.dogle.common;
  *
  */
 
-public class CommonVO {
+public class CommonVO implements Serializable {
 
 }

@@ -20,11 +20,11 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
-	@CrossOrigin(origins="http://localhost:9091") 
+	@CrossOrigin("*") 
 	@RequestMapping("/chkNicknameDup")
-	public long chkNicknameDup(MemberVO param) {
+	public long chkNicknameDup(@RequestBody MemberVO param) {
 
-		long result = memberService.chkNicknameDup(param);
+		int result = memberService.chkNicknameDup(param);
 		
 		LOGGER.info("chkNicknameDup ::: {}", result);
 

@@ -6,27 +6,25 @@
 			SELECT COUNT(*) FROM (
     
 		    SELECT 
-					MEMBER_ID, 
-					PASSWORD, 
+					MEMBER_ID AS memberId, 
+					PASSWORD AS password, 
 					NICK_NAME AS nickName, 
-					MEMBER_NAME, 
-					BIRTH, 
-					CDV, 
-					CV, 
-					CCV, 
-					MOBILE_NUMBER, 
-					MEMBER_INFO, 
-					REG_DATE, 
-					MANAGER_YN, 
-					WITHDRAW_YN, 
-					WITHDRAW_CODE, 
-					PERSONAL_INFO_YN, 
-					PERSONAL_INFO_REG_DATE
+					MEMBER_NAME AS memberName, 
+					BIRTH AS birth, 
+					CDV AS cdv, 
+					CV AS cv, 
+					CCV AS ccv, 
+					MOBILE_NUMBER AS mobileNumber, 
+					MEMBER_INFO AS memberInfo, 
+					REG_DATE AS regDate, 
+					MANAGER_YN AS managerYn, 
+					WITHDRAW_YN AS withdrawYn, 
+					WITHDRAW_CODE AS withdrawCode, 
+					PERSONAL_INFO_YN AS personalInfoYn, 
+					PERSONAL_INFO_REG_DATE AS personalInfoRegDate
 				FROM MEMBER_
-				WHERE 1=1
-				<if test="nickName != null or nickName != '' ">
-					AND NICK_NAME = #{nickName}
-				</if>
+				WHERE NICK_NAME = #{nickName}
+
 			) as memberTbl;		
 	</select>
 </mapper>

@@ -8,7 +8,7 @@
           <label>아이디</label>
         </el-col>
         <el-col :span="18">
-          <el-input placeholder="아이디를 입력하세요" v-model="id" clearable class="sign-input"></el-input>
+          <el-input placeholder="아이디를 입력하세요" v-model="memberVO.id" clearable class="sign-input"></el-input>
         </el-col>
       </el-row>
       <el-row>
@@ -16,7 +16,7 @@
           <label>비밀번호</label>
         </el-col>
         <el-col :span="16">
-          <el-input placeholder="비밀번호를 입력하세요" v-model="password" show-password class="sign-input"></el-input>
+          <el-input placeholder="비밀번호를 입력하세요" v-model="memberVO.password" show-password class="sign-input"></el-input>
         </el-col>
         <el-col :span="2">
           <el-button type="info" icon="el-icon-lock" circle></el-button>
@@ -43,7 +43,7 @@
           <label>닉네임</label>
         </el-col>
         <el-col :span="14">
-          <el-input placeholder="닉네임을 입력하세요" v-model="nickname" clearable class="sign-input"></el-input>
+          <el-input placeholder="닉네임을 입력하세요" v-model="memberVO.nickName" clearable class="sign-input"></el-input>
         </el-col>
         <el-col :span="4">
           <el-button type="primary" @click="chkNickNameDuplication()">중복확인</el-button>
@@ -53,21 +53,8 @@
         <el-col :span="6" class="label">
           <label>휴대전화</label>
         </el-col>
-        <el-col :span="13">
-          <el-input placeholder="전화번호을 입력하세요" v-model="phoneNum" clearable class="sign-input"></el-input>
-        </el-col>
-        <el-col :span="5">
-          <el-button type="primary">인증번호 받기</el-button>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="24">
-          <el-input
-            placeholder="인증번호을 입력하세요"
-            v-model="code"
-            class="sign-input"
-            aria-readonly="true"
-          ></el-input>
+        <el-col :span="18">
+          <el-input placeholder="전화번호을 입력하세요" v-model="memberVO.mobileNumber" clearable class="sign-input"></el-input>
         </el-col>
       </el-row>
       <el-row>
@@ -75,7 +62,7 @@
           <label>주소</label>
         </el-col>
         <el-col :span="5">
-          <el-input placeholder="지번" class="sign-input" aria-readonly="true"></el-input>
+          <el-input placeholder="지번" class="sign-input" aria-readonly="true" v-model="memberVO.cdv"></el-input>
         </el-col>
         <el-col :span="5">
           <el-button type="primary">주소찾기</el-button>
@@ -83,12 +70,12 @@
       </el-row>
       <el-row>
         <el-col :span="24">
-          <el-input placeholder="주소" class="sign-input" aria-readonly="true"></el-input>
+          <el-input placeholder="주소" class="sign-input" aria-readonly="true" v-model="memberVO.cv"></el-input>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="24">
-          <el-input placeholder="상세주소" class="sign-input"></el-input>
+          <el-input placeholder="상세주소" class="sign-input" v-model="memberVO.ccv"></el-input>
         </el-col>
       </el-row>
       <el-row>
@@ -96,16 +83,16 @@
           <label>자기소개</label>
         </el-col>
         <el-col :span="18">
-          <el-input type="textarea" :rows="2" placeholder="자기소개를 입력해주세요" v-model="textarea"></el-input>
+          <el-input type="textarea" :rows="2" placeholder="자기소개를 입력해주세요" v-model="memberVO.memberInfo"></el-input>
         </el-col>
       </el-row>
     </div>
     <button type="submit">회원가입</button>
-     <el-alert v-if="uniqueNickname"
+    <el-alert v-if="nicknameDupchkFlag == 0"
       title="사용가능한 닉네임입니다."
       type="info">
     </el-alert>
-    <el-alert v-if="!uniqueNickname"
+    <el-alert v-if="nicknameDupchkFlag == 1"
       title="동일한 닉네임이 존재합니다. 다시 생성해주세요."
       type="info">
     </el-alert>
@@ -119,33 +106,39 @@ export default {
   name: 'SignUp',
   data () {
     return {
-      id: '',
-      password: '',
       passwordChk: '',
-      nickname: '',
-      code: '',
-      phoneNum: '',
-      textarea: '',
       errors: [],
-      nicknameDupchkFlag: '',
-      uniqueNickname: false
+      nicknameDupchkFlag: 2,
+      memberVO: {
+        memberId: '',
+        password: '',
+        nickName: '',
+        memberName: '',
+        birth: '',
+        cdv: '',
+        cv: '',
+        ccv: '',
+        mobileNumber: '',
+        memberInfo: '',
+        regDate: '',
+        managerYn: 'N',
+        personalInfoYn: 'N',
+        personalInfoRegDate: ''
+      }
     }
   },
   methods: {
     chkNickNameDuplication () {
       console.log(this.nickname)
-      api.chkNickNameDup({nickName: this.nickname})
+      api
+        .chkNickNameDup(this.memberVO)
         .then(response => {
           this.nicknameDupchkFlag = response.data
-          if (this.nicknameDupchkFlag === 0) {
-            this.uniqueNickname = true
-          } else {
-            this.uniqueNickname = false
-          }
         })
         .catch(e => {
           this.errors.push(e)
         })
+      this.nicknameDupchkFlag = 2
     }
   }
 }

@@ -10,6 +10,15 @@ import com.example.demo.DogleException;
  */
 
 public class SHA256Util {
+	
+	/**
+	 * 
+	 * @param planeText
+	 * @return
+	 * @throws DogleException
+	 * 평문 String을 매개변수로 보내면, SHA256으로 암호화된 String을 리턴합니다.
+	 */
+	
 
 	public static String encrypt (String planeText) throws DogleException {
 		

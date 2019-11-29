@@ -21,8 +21,11 @@ public class DateUtil {
 	
 	/**
 	 * 
-	 * Date 타입을 yyyyMMdd 형식으로 리턴.
+	 * @param date
+	 * @return String
+	 * @throws DogleException
 	 * 
+	 * Date객체를 yyyyMMdd 형식의 String 으로 반환
 	 */
 	
 
@@ -40,10 +43,12 @@ public class DateUtil {
 	
 	/**
 	 * 
-	 * Date 타입을 yyyy-MM-dd 형식으로 리턴.
+	 * @param date
+	 * @return String
+	 * @throws DogleException
 	 * 
+	 * Date객체를 yyyy-MM-dd 형식의 String 으로 반환
 	 */
-	
 	
 	public static String getFormatyyyyMMdd2(Date date) throws DogleException {
 		
@@ -59,9 +64,9 @@ public class DateUtil {
 	
 	/**
 	 * 
-	 * 두 날짜(String)의 차이를 구해서 일수로 리턴.
 	 * @throws DogleException 
 	 * @Param yyyyMMdd 또는 yyyy-MM-dd
+	 * 두 날짜(String)의 차이를 구해서 일수로 리턴.
 	 */
 	
 	public static int getDiffDate(String date1, String date2) throws DogleException {

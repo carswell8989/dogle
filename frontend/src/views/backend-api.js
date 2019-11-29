@@ -6,7 +6,7 @@ const AXIOS = axios.create({
 	mode: 'no-cors',
 	headers: {
 		'Access-Control-Allow-Origin': '*',
-		'Content-Type': 'application/json'
+		'contentType': 'application/json'
 	}
 });
 
@@ -20,6 +20,13 @@ export default {
 				userId: id,
 				password: password
             }
+		})
+	},
+	chkNickNameDup(nickName) {
+		return AXIOS.get('http://localhost:9090/chkNicknameDup', { 
+			param: {
+				nickName : nickName
+			}
 		})
 	}
 }

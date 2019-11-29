@@ -13,12 +13,9 @@ public class MemberServiceImpl implements MemberService{
 	MemberDao memberDao;
 	
 	@Override
-	public long chkNicknameDup(MemberVO param) {
-		long chkFlag = 0;
-		MemberVO result = memberDao.selectMemberDao001(param);
-		
-		if(result != null) chkFlag = 1;
+	public int chkNicknameDup(MemberVO param) {
+		int cnt = memberDao.selectMemberDao001(param);
 
-		return chkFlag;
+		return cnt;
 	}
 }

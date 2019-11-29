@@ -3,6 +3,7 @@ package com.java.dogle.controller.member;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,10 +20,10 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
-	
+	@CrossOrigin(origins="http://localhost:9091") 
 	@RequestMapping("/chkNicknameDup")
-	public long chkNicknameDup(@RequestBody MemberVO param) {
-		
+	public long chkNicknameDup(MemberVO param) {
+
 		long result = memberService.chkNicknameDup(param);
 		
 		LOGGER.info("chkNicknameDup ::: {}", result);

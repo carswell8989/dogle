@@ -22,7 +22,7 @@ public class MemberDao extends CommonDao {
 	 * @throws Exception
 	 *
 	 */
-	public MemberVO selectMemberDao001(MemberVO param) {
+	public int selectMemberDao001(MemberVO param) {
 		return selectOne("selectMemberDao001", param);
 	}
 }

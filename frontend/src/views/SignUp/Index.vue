@@ -46,7 +46,7 @@
           <el-input placeholder="닉네임을 입력하세요" v-model="nickname" clearable class="sign-input"></el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary">중복확인</el-button>
+          <el-button type="primary" @click="chkNickNameDuplication()">중복확인</el-button>
         </el-col>
       </el-row>
       <el-row>
@@ -101,10 +101,20 @@
       </el-row>
     </div>
     <button type="submit">회원가입</button>
+     <el-alert v-if="uniqueNickname"
+      title="사용가능한 닉네임입니다."
+      type="info">
+    </el-alert>
+    <el-alert v-if="!uniqueNickname"
+      title="동일한 닉네임이 존재합니다. 다시 생성해주세요."
+      type="info">
+    </el-alert>
   </form>
 </template>
 
 <script>
+import api from '../backend-api'
+
 export default {
   name: 'SignUp',
   data () {
@@ -113,8 +123,29 @@ export default {
       password: '',
       passwordChk: '',
       nickname: '',
+      code: '',
       phoneNum: '',
-      textarea: ''
+      textarea: '',
+      errors: [],
+      nicknameDupchkFlag: '',
+      uniqueNickname: false
+    }
+  },
+  methods: {
+    chkNickNameDuplication () {
+      console.log(this.nickname)
+      api.chkNickNameDup({nickName: this.nickname})
+        .then(response => {
+          this.nicknameDupchkFlag = response.data
+          if (this.nicknameDupchkFlag === 0) {
+            this.uniqueNickname = true
+          } else {
+            this.uniqueNickname = false
+          }
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
     }
   }
 }

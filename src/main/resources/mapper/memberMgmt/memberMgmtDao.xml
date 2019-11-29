@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberMgmtDao">
-	<select id="selectMemberDao001"  parameterType="com.java.dogle.vo.member.MemberVO" resultType="HashMap">
-		<![CDATA[ /* [memberMgmetDao.xml][select] 조건에 맞는 회원정보 가져오기  */ ]]>
-		SELECT 
-			MEMBER_ID				AS memberId, 
-			PASSWORD				AS password, 
-			NICK_NAME 				AS nickName,
-			MEMBER_NAME				AS memberName, 
-			BIRTH					AS birth, 
-			CDV						AS cdv, 
-			CV						AS cv, 
-			CCV						AS ccv, 
-			MOBILE_NUMBER			AS mobileNumber, 
-			MEMBER_INFO				AS memberInfo, 
-			REG_DATE				AS regDate, 
-			MANAGER_YN				AS managerYn, 
-			WITHDRAW_YN				AS withdrawYn, 
-			WITHDRAW_CODE			AS withdrawCode, 
-			PERSONAL_INFO_YN		AS personalInfoYn, 
-			PERSONAL_INFO_REG_DATE	AS personalInfoRegDate
-		FROM MEMBER_
-		WHERE NICK_NAME = #{nickName};	/* 닉네임 중복확인 */
+	<select id="selectMemberDao001"  parameterType="com.java.dogle.vo.member.MemberVO" resultType="_int">
+		<![CDATA[ /* [memberMgmetDao.xml][select] 조건에 맞는 회원정보 가져오기  -닉네임 중복확인 */ ]]>
+			SELECT COUNT(*) FROM (
+    
+		    SELECT 
+					MEMBER_ID, 
+					PASSWORD, 
+					NICK_NAME AS nickName, 
+					MEMBER_NAME, 
+					BIRTH, 
+					CDV, 
+					CV, 
+					CCV, 
+					MOBILE_NUMBER, 
+					MEMBER_INFO, 
+					REG_DATE, 
+					MANAGER_YN, 
+					WITHDRAW_YN, 
+					WITHDRAW_CODE, 
+					PERSONAL_INFO_YN, 
+					PERSONAL_INFO_REG_DATE
+				FROM MEMBER_
+				WHERE 1=1
+				<if test="nickName != null or nickName != '' ">
+					AND NICK_NAME = #{nickName}
+				</if>
+			) as memberTbl;		
 	</select>
 </mapper>

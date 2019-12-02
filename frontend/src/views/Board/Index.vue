@@ -9,6 +9,7 @@
       <el-table-column prop="name" label="Name" width="180"> </el-table-column>
       <el-table-column prop="address" label="Address"> </el-table-column>
     </el-table>
+    <el-pagination background layout="prev, pager, next" :total="100"></el-pagination>
  </div>
 </template>
 <script>

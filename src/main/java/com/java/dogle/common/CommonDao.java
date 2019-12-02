@@ -72,6 +72,19 @@ public class CommonDao extends SqlSessionDaoSupport {
 		 return getSqlSession().selectList(nameSpace+"."+queryId, p);
 	 }
 	 
+	 //파라미터가 없는 insert
+	 public int insert(String queryId) {
+		 
+		 return getSqlSession().insert(nameSpace+"."+queryId);
+	 }
+	 
+	 
+	 //파라미터가 있는 insert
+	 public <P>int insert(String queryId, P p) {
+		 
+		 return getSqlSession().insert(nameSpace+"."+queryId, p);
+	 }
+	 
 	 //파라미터가 없는 update
 	 public int update(String queryId) {
 		 

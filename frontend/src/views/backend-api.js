@@ -21,7 +21,18 @@ export default {
       }
     })
   },
+  /**
+   * 닉네임 중복확인
+   * @param {*} memberVO 
+   */
   chkNickNameDup(memberVO) {
     return AXIOS.post('http://localhost:9090/chkNicknameDup', memberVO)
+  },
+   /**
+   * 회원등록
+   * @param {*} memberVO 
+   */
+  registMember(memberVO) {
+    return AXIOS.post('http://localhost:9090/registMember', memberVO)
   }
 }

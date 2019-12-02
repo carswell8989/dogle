@@ -11,6 +11,8 @@ import com.java.dogle.common.CommonVO;
  * 
  */
 public class MemberVO extends CommonVO {
+	private static final long serialVersionUID = 1L;
+	
 	String memberId; // 회원아이디
 	String password; // 비밀번호
 	String nickName; // 닉네임
@@ -30,6 +32,14 @@ public class MemberVO extends CommonVO {
 
 	public String getMemberId() {
 		return memberId;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	public void setMemberId(String memberId) {

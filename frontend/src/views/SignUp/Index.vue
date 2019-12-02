@@ -3,91 +3,101 @@
     <h1>DOGLE</h1>
 
     <div class="sign-form">
-      <el-row>
-        <el-col :span="6" class="label">
-          <label>아이디</label>
-        </el-col>
-        <el-col :span="18">
-          <el-input placeholder="아이디를 입력하세요" v-model="memberVO.id" clearable class="sign-input"></el-input>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="6" class="label">
-          <label>비밀번호</label>
-        </el-col>
-        <el-col :span="16">
-          <el-input placeholder="비밀번호를 입력하세요" v-model="memberVO.password" show-password class="sign-input"></el-input>
-        </el-col>
-        <el-col :span="2">
-          <el-button type="info" icon="el-icon-lock" circle></el-button>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="6" class="label">
-          <label>비밀번호 재확인</label>
-        </el-col>
-        <el-col :span="16">
-          <el-input
-            placeholder="비밀번호를 입력하세요"
-            v-model="passwordChk"
-            show-password
-            class="sign-input"
-          ></el-input>
-        </el-col>
-        <el-col :span="2">
-          <el-button type="info" icon="el-icon-lock" circle></el-button>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="6" class="label">
-          <label>닉네임</label>
-        </el-col>
-        <el-col :span="14">
-          <el-input placeholder="닉네임을 입력하세요" v-model="memberVO.nickName" clearable class="sign-input"></el-input>
-        </el-col>
-        <el-col :span="4">
-          <el-button type="primary" @click="chkNickNameDuplication()">중복확인</el-button>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="6" class="label">
-          <label>휴대전화</label>
-        </el-col>
-        <el-col :span="18">
-          <el-input placeholder="전화번호을 입력하세요" v-model="memberVO.mobileNumber" clearable class="sign-input"></el-input>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="6" class="label">
-          <label>주소</label>
-        </el-col>
-        <el-col :span="5">
-          <el-input placeholder="지번" class="sign-input" aria-readonly="true" v-model="memberVO.cdv"></el-input>
-        </el-col>
-        <el-col :span="5">
-          <el-button type="primary">주소찾기</el-button>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="24">
-          <el-input placeholder="주소" class="sign-input" aria-readonly="true" v-model="memberVO.cv"></el-input>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="24">
-          <el-input placeholder="상세주소" class="sign-input" v-model="memberVO.ccv"></el-input>
-        </el-col>
-      </el-row>
-      <el-row>
-        <el-col :span="6" class="label">
-          <label>자기소개</label>
-        </el-col>
-        <el-col :span="18">
-          <el-input type="textarea" :rows="2" placeholder="자기소개를 입력해주세요" v-model="memberVO.memberInfo"></el-input>
-        </el-col>
-      </el-row>
+      <ValidationObserver v-slot="{ handleSubmit }">
+        <form @submit.prevent="handleSubmit(onSubmit)">
+          <div>
+            <el-row>
+              <el-col :span="6" class="label">
+                <label>아이디</label>
+              </el-col>
+              <el-col :span="18">
+                <ValidationProvider name="아이디" rules="required" v-slot="v">
+                  <el-input placeholder="아이디를 입력하세요"  v-model="memberVO.id" clearable class="sign-input"></el-input>
+                  <span>{{ v.errors[0] }}</span>
+                </ValidationProvider>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="6" class="label">
+                <label>비밀번호</label>
+              </el-col>
+              <el-col :span="16">
+                <el-input placeholder="비밀번호를 입력하세요" v-model="memberVO.password" show-password class="sign-input"></el-input>
+              </el-col>
+              <el-col :span="2">
+                <el-button type="info" icon="el-icon-lock" circle></el-button>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="6" class="label">
+                <label>비밀번호 재확인</label>
+              </el-col>
+              <el-col :span="16">
+                <el-input
+                  placeholder="비밀번호를 입력하세요"
+                  v-model="passwordChk"
+                  show-password
+                  class="sign-input"
+                ></el-input>
+              </el-col>
+              <el-col :span="2">
+                <el-button type="info" icon="el-icon-lock" circle></el-button>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="6" class="label">
+                <label>닉네임</label>
+              </el-col>
+              <el-col :span="14">
+                <el-input placeholder="닉네임을 입력하세요" v-model="memberVO.nickName" clearable class="sign-input"></el-input>
+              </el-col>
+              <el-col :span="4">
+                <el-button type="primary" @click="chkNickNameDuplication()" v-show="!completeChkDupFlag">중복확인</el-button>
+                <el-button type="success" icon="el-icon-check" v-show="completeChkDupFlag">중복확인</el-button>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="6" class="label">
+                <label>휴대전화</label>
+              </el-col>
+              <el-col :span="18">
+                <el-input placeholder="전화번호을 입력하세요" v-model="memberVO.mobileNumber" clearable class="sign-input"></el-input>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="6" class="label">
+                <label>주소</label>
+              </el-col>
+              <el-col :span="5">
+                <el-input placeholder="지번" class="sign-input" aria-readonly="true" v-model="memberVO.cdv"></el-input>
+              </el-col>
+              <el-col :span="5">
+                <el-button type="primary">주소찾기</el-button>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="24">
+                <el-input placeholder="주소" class="sign-input" aria-readonly="true" v-model="memberVO.cv"></el-input>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="24">
+                <el-input placeholder="상세주소" class="sign-input" v-model="memberVO.ccv"></el-input>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="6" class="label">
+                <label>자기소개</label>
+              </el-col>
+              <el-col :span="18">
+                <el-input type="textarea" :rows="2" placeholder="자기소개를 입력해주세요" v-model="memberVO.memberInfo"></el-input>
+              </el-col>
+            </el-row>
+          </div>
+          <button type="submit">회원가입</button>
+        </form>
+      </ValidationObserver>
     </div>
-    <button type="submit">회원가입</button>
     <el-alert v-if="nicknameDupchkFlag == 0"
       title="사용가능한 닉네임입니다."
       type="info">
@@ -101,14 +111,20 @@
 
 <script>
 import api from '../backend-api'
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
 
 export default {
   name: 'SignUp',
+  components: {
+    ValidationProvider,
+    ValidationObserver
+  },
   data () {
     return {
       passwordChk: '',
-      errors: [],
+      passwordChkFlag: false,
       nicknameDupchkFlag: 2,
+      completeChkDupFlag: false,
       memberVO: {
         memberId: '',
         password: '',
@@ -120,26 +136,49 @@ export default {
         ccv: '',
         mobileNumber: '',
         memberInfo: '',
-        regDate: '',
         managerYn: 'N',
-        personalInfoYn: 'N',
-        personalInfoRegDate: ''
-      }
+        personalInfoYn: 'N'
+      },
+      errors: []
     }
   },
   methods: {
     chkNickNameDuplication () {
-      console.log(this.nickname)
       api
         .chkNickNameDup(this.memberVO)
         .then(response => {
           this.nicknameDupchkFlag = response.data
+          this.completeChkDupFlag = (this.nicknameDupchkFlag === 0)
         })
         .catch(e => {
           this.errors.push(e)
         })
-      this.nicknameDupchkFlag = 2
+    },
+
+    /**
+     * 회원정보 유효성을 검증한다.
+     */
+    validate () {
+      if (this.completeChkDupFlag !== true) {
+        this.$alert('닉네임 중복확인을 해주세요!')
+      }
+
+      return true
+    },
+
+    onSubmit () {
+      alert('Form has been submitted!')
     }
+
+    /**
+     * 회원정보를 등록한다.
+     */
+    // signUp () {
+    //   if (this.validate()) {
+    //     api
+    //       .registMember(this.memberVO)
+    //   }
+    // }
   }
 }
 </script>

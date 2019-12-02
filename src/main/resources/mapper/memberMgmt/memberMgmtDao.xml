@@ -28,4 +28,51 @@
 			</if>
 		) as memberTbl;		
 	</select>
+	
+	
+	<insert id="insertMemberDao002" parameterType="com.java.dogle.vo.member.MemberVO">
+		<![CDATA[ /* [memberMgmetDao.xml][insert] 회원정보 등록  */ ]]>
+		INSERT INTO MEMBER_
+	    (
+		 <trim prefix="" prefixOverrides=",">
+		 	MEMBER_ID, 
+		    PASSWORD, 
+		    NICK_NAME, 
+		    MEMBER_NAME, 
+		    BIRTH, 
+		    CDV, 
+		    CV, 
+		    CCV, 
+		    MOBILE_NUMBER, 
+		    MEMBER_INFO, 
+		    REG_DATE, 
+		    MANAGER_YN, 
+		    WITHDRAW_YN, 
+		    WITHDRAW_CODE, 
+		    PERSONAL_INFO_YN, 
+		    PERSONAL_INFO_REG_DATE
+		 </trim>   
+	    )
+		VALUES
+	    (
+	     <trim prefix="" prefixOverrides=",">
+		    #{memberId}, 
+		    #{password}, 
+		    #{nickName}, 
+		    #{memberName}, 
+		    #{birth}, 
+		    #{cdv}, 
+		    #{cv}, 
+		    #{ccv}, 
+		    #{mobileNumber}, 
+		    #{memberInfo}, 
+		    NOW(), 
+		    #{managerYn}, 
+		    #{withdrawYn}, 
+		    #{withdrawCode}, 
+		    #{personalInfoYn}, 
+		    NOW()
+	    </trim>
+	    );
+	</insert>
 </mapper>

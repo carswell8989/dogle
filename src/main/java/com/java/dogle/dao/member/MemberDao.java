@@ -15,14 +15,29 @@ public class MemberDao extends CommonDao {
 
 	/**
 	 *
-	 * 회원정보 조회 
+	 * 닉네임중복체크 
 	 *
 	 * @param MemberVO
-	 * @return MemberVO
+	 * @return int
 	 * @throws Exception
 	 *
 	 */
 	public int selectMemberDao001(MemberVO param) {
 		return selectOne("selectMemberDao001", param);
 	}
+	
+	
+	/**
+	 *
+	 * 회원정보 등록 
+	 *
+	 * @param MemberVO
+	 * @return int
+	 * @throws Exception
+	 *
+	 */
+	public int insertMemberDao002(MemberVO param) {
+		return insert("insertMemberDao002", param);		
+	}
+	
 }

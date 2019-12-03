@@ -2,51 +2,48 @@
   <div class="login">
     <h1>DOGLE</h1>
     <div class="unprotected" v-if="loginError">
-      <h1>
-        <p>You don't have rights here, mate :D</p>
-      </h1>
-      <h5>Seams that you don't have access rights...</h5>
+      <p class="p-errorText"><i class=" el-icon-error"></i> 인증오류</p>
+      <p class="p-errorText">권한이 없습니다. 로그인정보를 다시 확인해주세요 :(</p>
     </div>
-    <div class="unprotected" v-else>
-      <h1>
-        <p>Please login to get access!</p>
-      </h1>
-      <h5>You're not logged in - so you don't see much here. Try to log in:</h5>
-      <form class="login-form" @submit.prevent="callLogin()">
-        <el-input placeholder="아이디를 입력하세요" v-model="id" clearable class="user-input"></el-input>
-        <el-input placeholder="비밀번호를 입력하세요" v-model="password" show-password class="user-input"></el-input>
+    <div v-else>
+      <p>서비스 이용 시 로그인이 필요합니다 :D </p>
+    </div>
+    <form class="login-form" @submit.prevent="callLogin()">
+        <el-input placeholder="아이디를 입력하세요" v-model="memberVO.memberId" clearable class="user-input"></el-input>
+        <el-input placeholder="비밀번호를 입력하세요" v-model="memberVO.password" show-password class="user-input"></el-input>
         <button type="submit" class="btn-login">로그인</button>
-        <el-button icon="el-icon-check" class="btn-join">
+        <el-button icon="el-icon-position" class="btn-join">
           <router-link to="/signup">회원가입</router-link>
         </el-button>
       </form>
-    </div>
   </div>
 </template>
 
 <script>
-import router from '../router'
 
 export default {
   name: 'Login',
   data () {
     return {
       loginError: false,
-      id: '',
-      password: '',
+      memberVO: {
+        memberId: '',
+        password: ''
+      },
       error: false,
       errors: []
     }
   },
   methods: {
     callLogin () {
-      this.$store.dispatch('login',
-        { id: this.id, password: this.password })
+      this.$store.dispatch('login', this.memberVO)
         .then(() => {
-          router.push('/Protected')
+          this.$router.push('/Protected')
         })
         .catch(error => {
-          console.log('Error: ' + error)
+          this.loginError = true
+          this.errors.push(error)
+          this.error = true
         })
     }
   }
@@ -84,5 +81,9 @@ a {
 .login .login-form .btn-join {
   float: right;
   margin-top: 5px;
+}
+.login .p-errorText {
+  color: red;
+  font-size: 16px;
 }
 </style>

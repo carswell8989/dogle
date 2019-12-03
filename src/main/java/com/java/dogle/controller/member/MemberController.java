@@ -87,4 +87,32 @@ public class MemberController {
 
 		return result;
 	}
+	
+	
+	/**
+     * 회원인증
+     *
+     * @param  MemberVO
+     * @return N/A
+     * @throws Exception
+     *
+     */
+	@CrossOrigin("*") 
+	@RequestMapping("/login")
+	public int login(@RequestBody MemberVO param) {
+		MemberVO memberInfo = param;
+		
+		// 비밀번호 암호화
+		try {
+			memberInfo.setPassword(SHA256Util.encrypt(param.getPassword()));
+		} catch (DogleException e) {
+			e.printStackTrace();
+		}
+		
+		int result = memberService.login(param);
+		
+		LOGGER.info("login ::: {}", result);
+
+		return result;
+	}
 }

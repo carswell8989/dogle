@@ -43,4 +43,15 @@ public interface MemberService {
      *
      */
 	public int registMember(MemberVO param);
+	
+	
+	/**
+     * 회원인증
+     *
+     * @param  MemberVO
+     * @return int
+     * @throws Exception
+     *
+     */
+	public int login(MemberVO param);
 }

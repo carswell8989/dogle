@@ -62,4 +62,20 @@ public class MemberServiceImpl implements MemberService{
 		
 		return cnt;
 	}
+
+
+	/**
+     * 회원인증
+     *
+     * @param  MemberVO
+     * @return int
+     * @throws Exception
+     *
+     */
+	@Override
+	public int login(MemberVO param) {
+		int cnt = memberDao.selectMemberDao001(param);
+		
+		return cnt;
+	}
 }

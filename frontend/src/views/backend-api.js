@@ -13,13 +13,12 @@ export default {
   hello() {
     return AXIOS.get('http://localhost:9090/hotelSrh')
   },
-  getSecured(id, password) {
-    return AXIOS.get('http://localhost:9090/secured', {
-      auth: {
-        userId: id,
-        password: password
-      }
-    })
+   /**
+   * 로그인
+   * @param {*} memberVO 
+   */
+  login(memberVO) {
+    return AXIOS.post('http://localhost:9090/login', memberVO)
   },
   /**
    * 닉네임 중복확인

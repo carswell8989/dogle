@@ -29,11 +29,6 @@ public class MainController {
 	private static final Logger LOGGER = LogManager.getLogger(MainController.class);
 	
 	public static final String HELLO_TEXT = "Hello from Spring Boot Backend!";
-	public static final String SECURED_TEXT = "Hello from the secured resource!";
-	/*
-	 * @Autowired private SampleMapper sampleMapper;
-	 */
-	
 	
 	private SampleDao sampleDao;
 	
@@ -108,15 +103,5 @@ public class MainController {
 		
 		return test;
 		
-	}
-	
-	/**인증페이지 */
-	@CrossOrigin(origins="http://localhost:9091")  
-	@RequestMapping("/secured")
-	public String getSecured() {
-			
-		LOGGER.info("GET successfully called on /secured resource");
-		
-	    return SECURED_TEXT;
 	}
 }

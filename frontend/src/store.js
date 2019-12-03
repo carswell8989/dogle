@@ -19,7 +19,7 @@ const store = new Vuex.Store({
       state.userPass = payload.userPass
       state.accessToken = payload.accessToken
     },
-    login_Error (state, payload) {
+    login_error (state, payload) {
       state.loginError = true
       state.userId = payload.userId
     }
@@ -27,34 +27,32 @@ const store = new Vuex.Store({
   actions: {
     login ({
       commit
-    }, {
-      id,
-      password
-    }) {
+    }, memberVO) {
       return new Promise((resolve, reject) => {
-        console.log('Accessing backend with user: ' + id)
-        api.getSecured(id, password)
+        api.login(memberVO)
           .then(response => {
             console.log('Response: ' + response.data + ' with Statuscode ' + response.status)
-            if (response.status === 200) {
+            // 인증 성공 시
+            if (response.data === 1) {
               const token = Math.random().toString(36).substring(2)
               localStorage.token = token
               console.log('Login successful', token)
-              // place the loginSuccess state into our vuex store
+
               commit('login_success', {
-                userId: id,
-                userPass: password,
+                userId: memberVO.memberId,
+                userPass: memberVO.password,
                 accessToken: token
               })
+            }
+            // 인증 실패 시
+            if (response.data === 0) {
+              reject(new Error('접근권한이없는 사용자이거나 아이디 및 비밀번호 오류'))
+              commit('login_error', { userId: memberVO.memberId })
             }
             resolve(response)
           })
           .catch(error => {
             console.log('Error: ' + error)
-            // place the loginError state into our vuex store
-            commit('login_error', {
-              userId: id
-            })
           })
       })
     }

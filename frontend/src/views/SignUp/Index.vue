@@ -1,5 +1,5 @@
 <template>
-  <form class="signUp">
+  <div class="signUp">
     <h1>DOGLE</h1>
 
     <div class="sign-form">
@@ -11,10 +11,11 @@
                 <label>아이디</label>
               </el-col>
               <el-col :span="18">
-                <ValidationProvider name="아이디" rules="required" v-slot="v">
-                  <el-input placeholder="아이디를 입력하세요"  v-model="memberVO.id" clearable class="sign-input"></el-input>
-                  <span>{{ v.errors[0] }}</span>
-                </ValidationProvider>
+                 <ValidationProvider rules="required" v-slot="{ errors }">
+                    <el-input placeholder="아이디를 입력하세요"  v-model="memberVO.memberId" name="아이디" clearable class="sign-input" @blur="chkMemeberIdDuplication()"></el-input>
+                    <span class="error_msg">{{ errors[0] }}</span>
+                    <span class="error_msg" v-if="memberVO.memberId !== ''"> {{ chkIdDupMsg }}</span>
+                 </ValidationProvider>
               </el-col>
             </el-row>
             <el-row>
@@ -22,10 +23,13 @@
                 <label>비밀번호</label>
               </el-col>
               <el-col :span="16">
-                <el-input placeholder="비밀번호를 입력하세요" v-model="memberVO.password" show-password class="sign-input"></el-input>
+                   <ValidationProvider rules="required" v-slot="{ errors }">
+                    <el-input placeholder="비밀번호를 입력하세요" v-model="memberVO.password" name="비밀번호" show-password class="sign-input"><i class ="el-icon-lock"></i></el-input>
+                    <span class="error_msg">{{ errors[0] }}</span>
+                   </ValidationProvider>
               </el-col>
               <el-col :span="2">
-                <el-button type="info" icon="el-icon-lock" circle></el-button>
+                  <el-button type="info" icon="el-icon-lock" circle></el-button>
               </el-col>
             </el-row>
             <el-row>
@@ -33,12 +37,15 @@
                 <label>비밀번호 재확인</label>
               </el-col>
               <el-col :span="16">
-                <el-input
-                  placeholder="비밀번호를 입력하세요"
-                  v-model="passwordChk"
-                  show-password
-                  class="sign-input"
-                ></el-input>
+                <ValidationProvider rules="required" v-slot="{ errors }">
+                  <el-input
+                    placeholder="비밀번호를 입력하세요"
+                    v-model="passwordChk"
+                    show-password
+                    class="sign-input"
+                  ></el-input>
+                  <span class="error_msg">{{ errors[0] }}</span>
+                </ValidationProvider>
               </el-col>
               <el-col :span="2">
                 <el-button type="info" icon="el-icon-lock" circle></el-button>
@@ -48,12 +55,12 @@
               <el-col :span="6" class="label">
                 <label>닉네임</label>
               </el-col>
-              <el-col :span="14">
-                <el-input placeholder="닉네임을 입력하세요" v-model="memberVO.nickName" clearable class="sign-input"></el-input>
-              </el-col>
-              <el-col :span="4">
-                <el-button type="primary" @click="chkNickNameDuplication()" v-show="!completeChkDupFlag">중복확인</el-button>
-                <el-button type="success" icon="el-icon-check" v-show="completeChkDupFlag">중복확인</el-button>
+              <el-col :span="18">
+                <ValidationProvider rules="required" v-slot="{ errors }">
+                  <el-input placeholder="닉네임을 입력하세요" v-model="memberVO.nickName" clearable class="sign-input" @blur="chkNickNameDuplication()"></el-input>
+                  <span class="error_msg">{{ errors[0] }}</span>
+                  <span class="error_msg" v-if="memberVO.nickName !== ''"> {{ chkNickNameDupMsg }}</span>
+                </ValidationProvider>
               </el-col>
             </el-row>
             <el-row>
@@ -61,7 +68,10 @@
                 <label>휴대전화</label>
               </el-col>
               <el-col :span="18">
-                <el-input placeholder="전화번호을 입력하세요" v-model="memberVO.mobileNumber" clearable class="sign-input"></el-input>
+                <ValidationProvider rules="required|numeric" v-slot="{ errors }">
+                  <el-input placeholder="전화번호을 입력하세요" v-model="memberVO.mobileNumber" clearable class="sign-input"></el-input>
+                  <span class="error_msg">{{ errors[0] }}</span>
+                </ValidationProvider>
               </el-col>
             </el-row>
             <el-row>
@@ -69,7 +79,10 @@
                 <label>주소</label>
               </el-col>
               <el-col :span="5">
-                <el-input placeholder="지번" class="sign-input" aria-readonly="true" v-model="memberVO.cdv"></el-input>
+                <ValidationProvider rules="required" v-slot="{ errors }">
+                  <el-input placeholder="지번" class="sign-input" v-model="memberVO.cdv"  :disabled="true"></el-input>
+                  <span class="error_msg">{{ errors[0] }}</span>
+                </ValidationProvider>
               </el-col>
               <el-col :span="5">
                 <el-button type="primary">주소찾기</el-button>
@@ -77,12 +90,18 @@
             </el-row>
             <el-row>
               <el-col :span="24">
-                <el-input placeholder="주소" class="sign-input" aria-readonly="true" v-model="memberVO.cv"></el-input>
+                <ValidationProvider rules="required" v-slot="{ errors }">
+                  <el-input placeholder="주소" class="sign-input" v-model="memberVO.cv"  :disabled="true"></el-input>
+                  <span class="error_msg">{{ errors[0] }}</span>
+                </ValidationProvider>
               </el-col>
             </el-row>
             <el-row>
               <el-col :span="24">
-                <el-input placeholder="상세주소" class="sign-input" v-model="memberVO.ccv"></el-input>
+                <ValidationProvider rules="required" v-slot="{ errors }">
+                  <el-input placeholder="상세주소" class="sign-input" v-model="memberVO.ccv"  :disabled="true"></el-input>
+                  <span class="error_msg">{{ errors[0] }}</span>
+                </ValidationProvider>
               </el-col>
             </el-row>
             <el-row>
@@ -90,7 +109,7 @@
                 <label>자기소개</label>
               </el-col>
               <el-col :span="18">
-                <el-input type="textarea" :rows="2" placeholder="자기소개를 입력해주세요" v-model="memberVO.memberInfo"></el-input>
+                <el-input type="textarea" :rows="2" placeholder="자기소개를 입력해주세요" v-model="memberVO.memberInfo"   maxlength="1000" show-word-limit></el-input>
               </el-col>
             </el-row>
           </div>
@@ -98,20 +117,23 @@
         </form>
       </ValidationObserver>
     </div>
-    <el-alert v-if="nicknameDupchkFlag == 0"
-      title="사용가능한 닉네임입니다."
-      type="info">
-    </el-alert>
-    <el-alert v-if="nicknameDupchkFlag == 1"
-      title="동일한 닉네임이 존재합니다. 다시 생성해주세요."
-      type="info">
-    </el-alert>
-  </form>
+  </div>
 </template>
 
 <script>
 import api from '../backend-api'
-import { ValidationProvider, ValidationObserver } from 'vee-validate'
+import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
+import { required, numeric, email } from 'vee-validate/dist/rules'
+
+extend('required', {
+  ...required,
+  message: '* 필수값입니다.'
+})
+extend('numeric', {
+  ...numeric,
+  message: '유효한 값이 아닙니다.'
+})
+extend('email', email)
 
 export default {
   name: 'SignUp',
@@ -123,8 +145,10 @@ export default {
     return {
       passwordChk: '',
       passwordChkFlag: false,
-      nicknameDupchkFlag: 2,
-      completeChkDupFlag: false,
+      completeChkIdDup: false,
+      completeChkNickNameDup: false,
+      chkIdDupMsg: '',
+      chkNickNameDupMsg: '',
       memberVO: {
         memberId: '',
         password: '',
@@ -143,42 +167,54 @@ export default {
     }
   },
   methods: {
+    /**
+     * 닉네임 중복확인
+     */
     chkNickNameDuplication () {
-      api
-        .chkNickNameDup(this.memberVO)
-        .then(response => {
-          this.nicknameDupchkFlag = response.data
-          this.completeChkDupFlag = (this.nicknameDupchkFlag === 0)
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
-    },
-
-    /**
-     * 회원정보 유효성을 검증한다.
-     */
-    validate () {
-      if (this.completeChkDupFlag !== true) {
-        this.$alert('닉네임 중복확인을 해주세요!')
+      if (this.memberVO.nickName !== '') {
+        api
+          .chkMemberInfoDup({
+            'nickName': this.memberVO.nickName})
+          .then(response => {
+            if (response.data === 0) {
+              this.chkNickNameDupMsg = '사용가능한 닉네임입니다!'
+              this.completeChkNickNameDup = true
+            } else {
+              this.chkNickNameDupMsg = '이미 사용 중입니다.'
+              this.completeChkNickNameDup = false
+            }
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
       }
-
-      return true
     },
-
-    onSubmit () {
-      alert('Form has been submitted!')
-    }
-
     /**
-     * 회원정보를 등록한다.
+     * 아이디 중복확인
      */
-    // signUp () {
-    //   if (this.validate()) {
-    //     api
-    //       .registMember(this.memberVO)
-    //   }
-    // }
+    chkMemeberIdDuplication () {
+      if (this.memberVO.memberId !== '') {
+        api
+          .chkMemberInfoDup({
+            'memberId': this.memberVO.memberId
+          })
+          .then(response => {
+            if (response.data === 0) {
+              this.chkIdDupMsg = '사용가능한 아이디입니다!'
+              this.completeChkIdDup = true
+            } else {
+              this.chkIdDupMsg = '이미 사용 중입니다.'
+              this.completeChkIdDup = false
+            }
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+      }
+    },
+    onSubmit () {
+      alert('Form Submitted!')
+    }
   }
 }
 </script>
@@ -214,5 +250,12 @@ a {
 }
 .sign-form .sign-input .el-input__inner {
   height: 30px;
+}
+.sign-form .error_msg {
+  color: red;
+  text-align: left;
+  display: block;
+  font-size: 12px;
+  padding: 5px 0;
 }
 </style>

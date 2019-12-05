@@ -42,7 +42,7 @@ public class MemberController {
 	
 	
 	/**
-     * 닉네임 중복확인
+     * 중복확인
      *
      * @param  MemberVO
      * @return int
@@ -50,12 +50,12 @@ public class MemberController {
      *
      */
 	@CrossOrigin("*") 
-	@RequestMapping("/chkNicknameDup")
-	public int chkNicknameDup(@RequestBody MemberVO param) {
+	@RequestMapping("/chkMemberInfoDup")
+	public int chkMemberInfoDup(@RequestBody MemberVO param) {
 
-		int result = memberService.chkNicknameDup(param);
+		int result = memberService.chkMemberInfoDup(param);
 		
-		LOGGER.info("chkNicknameDup ::: {}", result);
+		LOGGER.info("chkMemberInfoDup ::: {}", result);
 
 		return result;
 	}

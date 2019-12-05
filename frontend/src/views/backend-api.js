@@ -21,11 +21,11 @@ export default {
     return AXIOS.post('http://localhost:9090/login', memberVO)
   },
   /**
-   * 닉네임 중복확인
+   * 중복확인
    * @param {*} memberVO 
    */
-  chkNickNameDup(memberVO) {
-    return AXIOS.post('http://localhost:9090/chkNicknameDup', memberVO)
+  chkMemberInfoDup(memberVO) {
+    return AXIOS.post('http://localhost:9090/chkMemberInfoDup', memberVO)
   },
    /**
    * 회원등록

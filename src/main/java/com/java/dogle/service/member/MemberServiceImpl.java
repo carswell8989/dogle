@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService{
 	
 	
 	/**
-     * 닉네임 중복확인
+     * 중복확인
      *
      * @param  MemberVO
      * @return int
@@ -41,7 +41,7 @@ public class MemberServiceImpl implements MemberService{
      *
      */
 	@Override
-	public int chkNicknameDup(MemberVO param) {
+	public int chkMemberInfoDup(MemberVO param) {
 		int cnt = memberDao.selectMemberDao001(param);
 
 		return cnt;

@@ -24,14 +24,14 @@ import com.java.dogle.vo.member.MemberVO;
 public interface MemberService {
 	
 	/**
-     * 닉네임 중복확인
+     * 중복확인
      *
      * @param  MemberVO
      * @return int
      * @throws Exception
      *
      */
-	public int chkNicknameDup(MemberVO param);
+	public int chkMemberInfoDup(MemberVO param);
 	
 	
 	/**

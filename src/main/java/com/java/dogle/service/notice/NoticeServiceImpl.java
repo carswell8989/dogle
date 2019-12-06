@@ -3,12 +3,14 @@ package com.java.dogle.service.notice;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.DogleException;
 import com.java.dogle.dao.notice.NoticeDao;
 import com.java.dogle.util.PagingUtil;
 import com.java.dogle.vo.notice.NoticeVO;
 
+@Service
 public class NoticeServiceImpl implements NoticeService {
 
 	

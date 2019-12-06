@@ -3,7 +3,7 @@
 <mapper namespace="noticeDao">
 
 
-	<select id="selectNoticeCount1" resultType="com.java.dogle.vo.member.NoticeVO">
+	<select id="selectNoticeCount1" resultType="com.java.dogle.vo.notice.NoticeVO">
 	<![CDATA[ /* [noticeDao.xml][selectNoticeCount1] 공지사항 기본 selectList count  */ ]]>
 	 SELECT 
 	    COUNT(1) AS total
@@ -14,7 +14,7 @@
 	 FROM NOTICE;
 	</select>
 
-	<select id="selectNotice1" resultType="com.java.dogle.vo.member.NoticeVO">
+	<select id="selectNotice1" resultType="com.java.dogle.vo.notice.NoticeVO">
 	<![CDATA[ /* [noticeDao.xml][selectNoticeCount2] 공지사항 기본 selectList  */ ]]>
 	 SELECT 
 	     NOTICE_NO AS noticeNo

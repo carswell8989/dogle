@@ -17,26 +17,31 @@ public class PagingUtil {
 	 * 
 	 */
 	public static void setPageInfo(PageVO pageVo) throws DogleException {
-		
+
 		if(pageVo.getPageRow() <= 0) {
 			throw new DogleException("PageRow가 없습니다.");
 		}
 		
 		if(pageVo.getCurrentPage() <= 0) {
 			throw new DogleException("현재 페이지 정보가 없습니다.");
-		}
-		
-		if(pageVo.getTotal() <= 0) {
-			throw new DogleException("작성된 글이 없습니다.(total : 0)");
-		}
-		
-		
+		}	
 		int totalPage = 0;  //전체 페이지
 		int offset = 0; // 현재 페이지 기준 보여줄 글의 offset
 		
 		int total = pageVo.getTotal(); //글의 수 
 		int pageRow = pageVo.getPageRow(); //페이지당 보여줄 글의 수
 		int currentPage = pageVo.getCurrentPage(); // 현재 페이지 - 기본값 1
+		pageVo.setLimit(pageRow);
+		
+		
+		if(pageVo.getTotal() == 0) {
+			return;
+		}
+
+		//기본값 1페이지로 설정.
+		if(currentPage == 0) {
+			currentPage = 1;
+		}
 		
 		//전체 페이지
 		totalPage = total / pageRow;

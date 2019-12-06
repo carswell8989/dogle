@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noticeDao">
+
+
+	<select id="selectNoticeCount1" resultType="com.java.dogle.vo.member.NoticeVO">
+	<![CDATA[ /* [noticeDao.xml][selectNoticeCount1] 공지사항 기본 selectList count  */ ]]>
+	 SELECT 
+	    COUNT(1) AS total
+	 WHERE 1=1
+	 <if test='titleKeyword != null and titleKeyword != "" '>
+	 AND TITLE LIKE CONCAT('%', #{titleKeyword}, '%')
+	 </if>
+	 FROM NOTICE;
+	</select>
+
+	<select id="selectNotice1" resultType="com.java.dogle.vo.member.NoticeVO">
+	<![CDATA[ /* [noticeDao.xml][selectNoticeCount2] 공지사항 기본 selectList  */ ]]>
+	 SELECT 
+	     NOTICE_NO AS noticeNo
+	    ,TITLE AS title
+	    ,DATE_FORMAT(REG_DATE, '%y-%m-%d) AS regDate
+	 FROM NOTICE 
+	 WHERE 1=1
+	 <if test='titleKeyword != null and titleKeyword != "" '>
+	 AND TITLE LIKE CONCAT('%', #{titleKeyword}, '%')
+	 </if>
+	 ORDER BY TOP_YN DESC, NOTICE_NO DESC
+	 LIMIT #{limit} OFFSET #{offset}
+	</select>
+
+
+
+</mapper>

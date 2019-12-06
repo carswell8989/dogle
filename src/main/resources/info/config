@@ -58,6 +58,49 @@
 5. Vuex를 등록하는 파일은 관례에 따라 store.js로 지정합니다. =>(/dogle/frontend/src/store.js)
 6. Vue App이 등록된 main.js로 넘어가서 store.js를 불러와 등록하면 됩니다. =>(/dogle/frontend/src/main.js)
 
+#############################################	
+2019.12.06 프론트엔드 환경설정 - eslint
+1. VSCODE 설치
+https://code.visualstudio.com/
+
+2. GIT설치
+https://git-scm.com/
+
+3. ESLint 플러그인 설치
+마켓플레이스에서 ESLint를 검색해서 플러그인을 설치한다.
+
+4. VS code 설정
+.vscode 폴더에 settings.json 파일 추가하고 아래와 같이 편집한다.
+{
+	"eslint.validate": [
+    {"language": "vue", "autoFix": true}, //vue 체크
+    {"language": "javascript", "autoFix": true}, //자바스크립트 체크
+    {"language": "html", "autoFix": true}, //HTML 체크 <div></div> -> <div />
+],
+"eslint.autoFixOnSave": true,
+"eslint.alwaysShowStatus": true,
+}
+
+
+#############################################
+2019.12.06 프론트엔드 환경설정 - vee-validate 
+
+*참고사이트 : https://logaretm.github.io/vee-validate/
+1. 설치
+npm install vee-validate --save
+
+	
+		
+
+
+
+
+
+
+
+
+
+
 
 
 

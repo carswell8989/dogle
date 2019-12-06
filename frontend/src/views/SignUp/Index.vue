@@ -8,6 +8,17 @@
           <div>
             <el-row>
               <el-col :span="6" class="label">
+                <label>이름</label>
+              </el-col>
+              <el-col :span="18">
+                 <ValidationProvider rules="required" v-slot="{ errors }">
+                    <el-input placeholder="이름를 입력하세요"  v-model="memberVO.memberName" name="이름" clearable class="sign-input"></el-input>
+                    <span class="error_msg">{{ errors[0] }}</span>
+                 </ValidationProvider>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="6" class="label">
                 <label>아이디</label>
               </el-col>
               <el-col :span="18">
@@ -63,6 +74,22 @@
                 </ValidationProvider>
               </el-col>
             </el-row>
+             <el-row>
+              <el-col :span="6" class="label">
+                <label>생년월일</label>
+              </el-col>
+              <el-col :span="18" class="birth-field">
+                <ValidationProvider rules="required" v-slot="{ errors }" style="text-align=left;">
+                   <el-date-picker
+                    v-model="memberVO.birth"
+                    value-format="yyyyMMdd"
+                    type="date"
+                    placeholder="생년월일을 선택하세요">
+                  </el-date-picker>
+                  <span class="error_msg">{{ errors[0] }}</span>
+                </ValidationProvider>
+              </el-col>
+            </el-row>
             <el-row>
               <el-col :span="6" class="label">
                 <label>휴대전화</label>
@@ -80,18 +107,18 @@
               </el-col>
               <el-col :span="5">
                 <ValidationProvider rules="required" v-slot="{ errors }">
-                  <el-input placeholder="지번" class="sign-input" v-model="memberVO.cdv"  :disabled="true"></el-input>
+                  <el-input placeholder="지번" class="sign-input" v-model="addressSearchResult.postcode" :disabled="true"></el-input>
                   <span class="error_msg">{{ errors[0] }}</span>
                 </ValidationProvider>
               </el-col>
               <el-col :span="5">
-                <el-button type="primary">주소찾기</el-button>
+                <el-button type="primary" @click="addrSearchVisible = true">주소찾기</el-button>
               </el-col>
             </el-row>
             <el-row>
               <el-col :span="24">
                 <ValidationProvider rules="required" v-slot="{ errors }">
-                  <el-input placeholder="주소" class="sign-input" v-model="memberVO.cv"  :disabled="true"></el-input>
+                  <el-input placeholder="주소" class="sign-input" v-model="addressSearchResult.address"  :disabled="true"></el-input>
                   <span class="error_msg">{{ errors[0] }}</span>
                 </ValidationProvider>
               </el-col>
@@ -99,7 +126,7 @@
             <el-row>
               <el-col :span="24">
                 <ValidationProvider rules="required" v-slot="{ errors }">
-                  <el-input placeholder="상세주소" class="sign-input" v-model="memberVO.ccv"  :disabled="true"></el-input>
+                  <el-input placeholder="상세주소" class="sign-input" v-model="memberVO.ccv"></el-input>
                   <span class="error_msg">{{ errors[0] }}</span>
                 </ValidationProvider>
               </el-col>
@@ -113,10 +140,17 @@
               </el-col>
             </el-row>
           </div>
-          <button type="submit">회원가입</button>
+          <button type="submit" class="submit-btn">회원가입</button>
         </form>
       </ValidationObserver>
     </div>
+    <el-dialog
+      title="주소검색"
+      :visible.sync="addrSearchVisible"
+      width="30%"
+      :before-close="addrSearchClose">
+      <VueDaumPostcode @complete="addressSearchResult = $event; addressSearchCall()"/>
+    </el-dialog>
   </div>
 </template>
 
@@ -124,6 +158,7 @@
 import api from '../backend-api'
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
 import { required, numeric, email } from 'vee-validate/dist/rules'
+import { VueDaumPostcode } from 'vue-daum-postcode'
 
 extend('required', {
   ...required,
@@ -138,8 +173,9 @@ extend('email', email)
 export default {
   name: 'SignUp',
   components: {
-    ValidationProvider,
-    ValidationObserver
+    ValidationProvider, // 필드 검증 컴포넌트
+    ValidationObserver, // 폼 검증 컴포넌트
+    VueDaumPostcode // 주소감색 컴포넌트
   },
   data () {
     return {
@@ -149,6 +185,8 @@ export default {
       completeChkNickNameDup: false,
       chkIdDupMsg: '',
       chkNickNameDupMsg: '',
+      addrSearchVisible: false, // 주소검색팝업창 변수
+      addressSearchResult: {},
       memberVO: {
         memberId: '',
         password: '',
@@ -160,8 +198,10 @@ export default {
         ccv: '',
         mobileNumber: '',
         memberInfo: '',
+        withdrawYn: 'N',
         managerYn: 'N',
-        personalInfoYn: 'N'
+        personalInfoYn: 'Y',
+        withdrawCode: '0000'
       },
       errors: []
     }
@@ -212,8 +252,38 @@ export default {
           })
       }
     },
+    /**
+     * 주소검색 팝업창 닫기
+     */
+    addrSearchClose (done) {
+      done()
+    },
+    /**
+     * 주소검색 팝업창 콜백
+     */
+    addressSearchCall () {
+      this.addrSearchVisible = false
+      console.log(this.addressSearchResult)
+      this.memberVO.cdv = this.addressSearchResult.postcode
+      this.memberVO.cv = this.addressSearchResult.address
+    },
+    /**
+     * 회원가입
+     */
     onSubmit () {
-      alert('Form Submitted!')
+      api
+        .registMember(this.memberVO)
+        .then(response => {
+          if (response.data === 1) {
+            this.$alert('회원가입이 정상적으로 완료되었습니다!', '회원가입완료', {
+              confirmButtonText: '확인'
+            })
+          }
+        })
+        .catch(e => {
+          console.log(e)
+          this.errors.push(e)
+        })
     }
   }
 }
@@ -248,6 +318,9 @@ a {
   line-height: 30px;
   text-align: left;
 }
+.sign-form .sign-input .el-input {
+  font-size: 12px;
+}
 .sign-form .sign-input .el-input__inner {
   height: 30px;
 }
@@ -257,5 +330,18 @@ a {
   display: block;
   font-size: 12px;
   padding: 5px 0;
+}
+.sign-form .birth-field {
+  text-align: left;
+}
+.sign-form .submit-btn {
+  margin-top: 30px;
+  width: 100px;
+  height: 40px;
+  background: #000;
+  color : #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>

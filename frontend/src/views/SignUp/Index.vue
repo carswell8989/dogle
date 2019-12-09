@@ -213,10 +213,9 @@ export default {
     chkNickNameDuplication () {
       if (this.memberVO.nickName !== '') {
         api
-          .chkMemberInfoDup({
-            'nickName': this.memberVO.nickName})
+          .chkNickNameDup(this.memberVO.nickName)
           .then(response => {
-            if (response.data === 0) {
+            if (response.data === false) {
               this.chkNickNameDupMsg = '사용가능한 닉네임입니다!'
               this.completeChkNickNameDup = true
             } else {
@@ -235,11 +234,9 @@ export default {
     chkMemeberIdDuplication () {
       if (this.memberVO.memberId !== '') {
         api
-          .chkMemberInfoDup({
-            'memberId': this.memberVO.memberId
-          })
+          .chkMemberIdDup(this.memberVO.memberId)
           .then(response => {
-            if (response.data === 0) {
+            if (response.data === false) {
               this.chkIdDupMsg = '사용가능한 아이디입니다!'
               this.completeChkIdDup = true
             } else {

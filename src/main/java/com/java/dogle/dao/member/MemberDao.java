@@ -15,7 +15,7 @@ public class MemberDao extends CommonDao {
 
 	/**
 	 *
-	 * 닉네임중복체크 
+	 * 중복체크 
 	 *
 	 * @param MemberVO
 	 * @return int
@@ -25,7 +25,7 @@ public class MemberDao extends CommonDao {
 	public int selectMemberDao001(MemberVO param) {
 		return selectOne("selectMemberDao001", param);
 	}
-	
+		
 	
 	/**
 	 *

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberMgmtDao">
 	<select id="selectMemberDao001"  parameterType="com.java.dogle.vo.member.MemberVO" resultType="_int">
-		<![CDATA[ /* [memberMgmetDao.xml][select] 조건에 맞는 회원정보 가져오기  */ ]]>
+		<![CDATA[ /* [memberMgmetDao.xml][select] 회원정보 중복 체크  */ ]]>
 		SELECT COUNT(*) FROM (
 		    SELECT 
 				MEMBER_ID AS memberId, 		/*아이디*/
@@ -26,15 +26,16 @@
 			<if test="memberId != null and memberId != ''">
 			AND MEMBER_ID = #{memberId}
 			</if>
-			<if test="password != null and password != ''">
-			AND PASSWORD = #{password}
-			</if>
 			<if test="nickName != null and nickName != ''">
 			AND NICK_NAME = #{nickName}
+			</if>
+			<if test="password != null and password != ''">
+			AND PASSWORD = #{password}
 			</if>
 		) as memberTbl;		
 	</select>
 	
+
 	
 	<insert id="insertMemberDao002" parameterType="com.java.dogle.vo.member.MemberVO">
 		<![CDATA[ /* [memberMgmetDao.xml][insert] 회원정보 등록  */ ]]>

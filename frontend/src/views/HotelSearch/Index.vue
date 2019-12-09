@@ -2,15 +2,10 @@
   <div class="hotelSrh">
     <h1>호텔검색</h1>
     <h2>반려견과 함께할 호텔을 검색해보세요!</h2>
-
-    <button @click="getData()">데이터 가져오기</button>
-
-    <p v-if="showResponse">{{data}}</p>
   </div>
 </template>
 
 <script>
-import api from '../backend-api'
 
 export default {
   name: 'HotelIndex',
@@ -23,20 +18,6 @@ export default {
     }
   },
   methods: {
-    // Fetches posts when the component is created.
-    getData () {
-      api
-        .hello()
-        .then(response => {
-          this.response = response.data
-          this.data = response.data
-          console.log('Success! ' + response.data)
-          this.showResponse = true
-        })
-        .catch(e => {
-          this.errors.push(e)
-        })
-    }
   }
 }
 </script>

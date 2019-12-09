@@ -3,6 +3,7 @@ import axios from 'axios'
 
 const AXIOS = axios.create({
   mode: 'no-cors',
+  baseURL: 'http://localhost:9090',
   headers: {
     'Access-Control-Allow-Origin': '*',
     'contentType': 'application/json'
@@ -10,28 +11,33 @@ const AXIOS = axios.create({
 });
 
 export default {
-  hello() {
-    return AXIOS.get('http://localhost:9090/hotelSrh')
-  },
    /**
    * 로그인
-   * @param {*} memberVO 
+   * @param {*} memberId 
+   * @param {*} password
    */
-  login(memberVO) {
-    return AXIOS.post('http://localhost:9090/login', memberVO)
+  login(memberId, password) {
+    return AXIOS.get('/member/memberLogin/' + memberId + '/' + password)
   },
   /**
-   * 중복확인
-   * @param {*} memberVO 
+   * 아이디중복확인
+   * @param {*} memberId 
    */
-  chkMemberInfoDup(memberVO) {
-    return AXIOS.post('http://localhost:9090/chkMemberInfoDup', memberVO)
+  chkMemberIdDup(memberId) {
+    return AXIOS.get('/member/memberInfo/id/' + memberId)
+  },
+  /**
+   * 닉네임중복확인
+   * @param {*} nickName 
+   */
+  chkNickNameDup(nickName) {
+    return AXIOS.get('/member/memberInfo/nickName/' + nickName)
   },
    /**
    * 회원등록
    * @param {*} memberVO 
    */
   registMember(memberVO) {
-    return AXIOS.post('http://localhost:9090/registMember', memberVO)
+    return AXIOS.post('/member/members', memberVO)
   }
 }

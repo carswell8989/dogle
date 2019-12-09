@@ -24,14 +24,36 @@ import com.java.dogle.vo.member.MemberVO;
 public interface MemberService {
 	
 	/**
-     * 중복확인
+     * 아이디중복확인
+     *
+     * @param  memberId
+     * @return int
+     * @throws Exception
+     *
+     */
+	public int chkMemberIdDup(MemberVO memberId);
+	
+	
+	/**
+     * 닉네임중복확인
+     *
+     * @param  nickName
+     * @return int
+     * @throws Exception
+     *
+     */
+	public int chkNickNameDup(MemberVO nickName);
+	
+	
+	/**
+     * 회원인증
      *
      * @param  MemberVO
      * @return int
      * @throws Exception
      *
      */
-	public int chkMemberInfoDup(MemberVO param);
+	public int login(MemberVO param);
 	
 	
 	/**
@@ -45,13 +67,5 @@ public interface MemberService {
 	public int registMember(MemberVO param);
 	
 	
-	/**
-     * 회원인증
-     *
-     * @param  MemberVO
-     * @return int
-     * @throws Exception
-     *
-     */
-	public int login(MemberVO param);
+
 }

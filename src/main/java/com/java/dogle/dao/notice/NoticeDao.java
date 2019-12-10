@@ -21,7 +21,12 @@ public class NoticeDao extends CommonDao {
 	}
 	
 	public List<NoticeVO> selectNoticeB(NoticeVO param) throws DogleException {
-		return selectList("selectNotice1", param);
+		return selectList("selectNoticeList1", param);
 	}
+	
+	public List<NoticeVO> selectNoticeC(NoticeVO param) throws DogleException {
+		return selectList("selectNoticeList2", param);
+	}
+	
 	
 }

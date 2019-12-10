@@ -25,7 +25,28 @@ public class NoticeVO extends PageVO {
 	
 	private List<NoticeVO> list;
 	
+	private List<NoticeVO> topList;
+	//작성자
+	private String writer;
 	
+	
+	
+
+	public List<NoticeVO> getTopList() {
+		return topList;
+	}
+
+	public void setTopList(List<NoticeVO> topList) {
+		this.topList = topList;
+	}
+
+	public String getWriter() {
+		return writer;
+	}
+
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
 
 	public List<NoticeVO> getList() {
 		return list;

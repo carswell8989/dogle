@@ -7,26 +7,46 @@
 	<![CDATA[ /* [noticeDao.xml][selectNoticeCount1] 공지사항 기본 selectList count  */ ]]>
 	 SELECT 
 	    COUNT(1) AS total
+	 FROM NOTICE
 	 WHERE 1=1
 	 <if test='titleKeyword != null and titleKeyword != "" '>
-	 AND TITLE LIKE CONCAT('%', #{titleKeyword}, '%')
+	 AND TITLE LIKE CONCAT('%', #{titleKeyword}, '%') ;
 	 </if>
-	 FROM NOTICE;
+
 	</select>
 
-	<select id="selectNotice1" resultType="com.java.dogle.vo.notice.NoticeVO">
-	<![CDATA[ /* [noticeDao.xml][selectNoticeCount2] 공지사항 기본 selectList  */ ]]>
+	<select id="selectNoticeList1" resultType="com.java.dogle.vo.notice.NoticeVO">
+	<![CDATA[ /* [noticeDao.xml][selectNoticeList1] 공지사항 기본 selectList  */ ]]>
 	 SELECT 
-	     NOTICE_NO AS noticeNo
-	    ,TITLE AS title
-	    ,DATE_FORMAT(REG_DATE, '%y-%m-%d) AS regDate
-	 FROM NOTICE 
+	     T1.NOTICE_NO AS noticeNo
+	    ,T1.TITLE AS title
+	    ,DATE_FORMAT(T1.REG_DATE, '%Y-%m-%d') AS regDate
+	    ,T2.NICK_NAME AS writer
+	 FROM NOTICE T1 /* 공지사항 */
+	 JOIN MEMBER_ T2 ON (T1.MEMBER_ID = T2.MEMBER_ID) /* 회원 */
 	 WHERE 1=1
 	 <if test='titleKeyword != null and titleKeyword != "" '>
-	 AND TITLE LIKE CONCAT('%', #{titleKeyword}, '%')
+	 AND T1.TITLE LIKE CONCAT('%', #{titleKeyword}, '%')
 	 </if>
-	 ORDER BY TOP_YN DESC, NOTICE_NO DESC
-	 LIMIT #{limit} OFFSET #{offset}
+	 AND T1.TOP_YN = 'N' /* 별도로 추출 */
+	 ORDER BY NOTICE_NO DESC
+	 LIMIT #{limit} OFFSET #{offset} ;
+	</select>
+
+    <select id="selectNoticeList2" resultType="com.java.dogle.vo.notice.NoticeVO">
+	<![CDATA[ /* [noticeDao.xml][selectNoticeList2] 공지사항 상단 게시물 select  */ ]]>
+	
+	SELECT
+	     T2.NOTICE_NO AS noticeNo
+	    ,T2.TITLE AS title
+	    ,DATE_FORMAT(T2.REG_DATE, '%Y-%m-%d') AS regDate
+	    ,T3.NICK_NAME AS writer
+	FROM NOTICE_HEAD T1 /* 공지사항 상단노출 */
+	JOIN NOTICE T2 ON (T1.NOTICE_NO = T2.NOTICE_NO) /* 공지사항 */
+	JOIN MEMBER_ T3 ON (T2.MEMBER_ID = T3.MEMBER_ID) /* 회원 */
+	ORDER BY T1.NOTICE_NO DESC ;
+
+
 	</select>
 
 

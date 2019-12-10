@@ -30,24 +30,32 @@ public class NoticeServiceImpl implements NoticeService {
 		/**
 		 * 메인 Vo에는 pageing 정보
 		 * 하위 list에는 글 리스트 반환.
+		 * 
+		 * 
 		 */
 		
 		//조건에 맞는 count select
 		NoticeVO resultVo = noticeDao.selectNoticeA();
 		
+		
 		//없으면 그냥 리턴.
 		if(resultVo.getTotal() == 0) {
 			return resultVo;
 		}
-		
+
 		//pageRow 설정
 		resultVo.setPageRow(10);
 		
-		//객체에 페이징 정보 셋팅 함수 호출.
+		//객체에 페이징 정보 셋팅 함수 호출. -> paramVo 이용
 		PagingUtil.setPageInfo(resultVo);
 		
 		//조건에 맞는 count select
 		resultVo.setList(noticeDao.selectNoticeB(resultVo));
+		
+		//상단 리스트
+		resultVo.setTopList(noticeDao.selectNoticeC(resultVo));
+		
+		
 		
 		return resultVo;
 	}

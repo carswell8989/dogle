@@ -5,19 +5,19 @@
       <el-button type="primary">로그아웃</el-button>
     </div>
     <div v-if="!isLoggedIn">
-      <el-button type="primary"><router-link to="/login">로그인</router-link></el-button>
+      <el-button type="primary"><router-link to="/member/login">로그인</router-link></el-button>
     </div>
   </div>
 </template>
 
 <script>
-import store from '../store'
+import memberStore from './Store/memberStore'
 
 export default {
   name: 'MainIndex',
   data () {
     return {
-      isLoggedIn: store.state.loginSucess
+      isLoggedIn: memberStore.state.loginSucess
     }
   }
 }

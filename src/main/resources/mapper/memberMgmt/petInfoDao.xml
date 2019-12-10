@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PetInfoDao">
+	<select  id="selectPetInfoDao001"  parameterType="com.java.dogle.vo.member.MemberVO" resultType="com.java.dogle.vo.member.PetInfoVO">
+		<![CDATA[ /* [petInfoDao.xml][select] 특정 회원의 애완견 정보 조회*/ ]]>
+		SELECT 
+			MEMBER_ID AS memberId, 				/*회원아이디*/
+			PET_NO AS petNo, 					/*애견일련번호*/
+			PET_NAME AS petName, 				/*애견명*/
+			PET_AGE AS petAge, 					/*나이*/
+			PET_SIZE_KIND_CD AS petSizeKindCd, 	/*애견크기*/
+			PET_LIKE AS petLike					/*소개*/
+		FROM PET_INFO
+		WHERE 1=1
+		<if test="memberId != null and memberId != ''">
+		AND MEMBER_ID = #{memberId};		/*회원아이디*/
+		</if>
+	</select>
+	
+	<insert id="insertPetInfoDao002" parameterType="com.java.dogle.vo.member.PetInfoVO">
+		<![CDATA[ /* [petInfoDao.xml][insert] 애완견 정보 등록*/ ]]>
+		INSERT INTO PET_INFO
+	    (
+	     <trim prefix="" prefixOverrides=",">
+	   		MEMBER_ID, 			/*회원아이디*/
+	   		PET_NO,				/*일련번호*/
+		    PET_NAME, 			/*애견명*/
+		    PET_AGE, 			/*나이*/
+		    PET_SIZE_KIND_CD, 	/*애견크기*/
+		    PET_LIKE			/*소개*/
+	    </trim>	
+	    )
+		VALUES
+	    (
+	     <trim prefix="" prefixOverrides=",">
+	    	#{memberId}, 
+	    	#{petNo},
+		    #{petName}, 
+		    #{petAge},
+		    #{petSizeKindCd}, 
+		    #{petLike}
+		 </trim>
+	    );
+	</insert>
+</mapper>

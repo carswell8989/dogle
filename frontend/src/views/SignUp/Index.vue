@@ -155,7 +155,7 @@
 </template>
 
 <script>
-import api from '../backend-api'
+import api from '../Controller/Member-api'
 import { ValidationProvider, ValidationObserver, extend } from 'vee-validate'
 import { required, numeric, email } from 'vee-validate/dist/rules'
 import { VueDaumPostcode } from 'vue-daum-postcode'

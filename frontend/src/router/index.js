@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from '../store'
+import store from '@/views/Store/memberStore'
 import MainIndex from '@/views/Main'
 import HotelIndex from '@/views/HotelSearch/Index'
 import BoardIndex from '@/views/Board/Index'
@@ -36,7 +36,7 @@ const router = new Router({
       }
     },
     {
-      path: '/myPage',
+      path: '/member/myPage',
       name: 'MyPageIndex',
       component: MyPageIndex,
       meta: {
@@ -44,7 +44,7 @@ const router = new Router({
       }
     },
     {
-      path: '/login',
+      path: '/member/login',
       name: 'Login',
       component: Login
     },
@@ -57,9 +57,12 @@ const router = new Router({
       }
     },
     {
-      path: '/SignUp',
+      path: '/member/SignUp',
       name: 'SignUp',
-      component: SignUp
+      component: SignUp,
+      children: [
+
+      ]
     },
     // otherwise redirect to home
     { path: '*', redirect: '/' }

@@ -4,7 +4,7 @@ import com.java.dogle.vo.member.MemberVO;
 
 /**
  * 
- * 회원가입 Service
+ * 회원관리 Service
  *
  * @author  전유진
  * @since   2019-12-02
@@ -22,6 +22,17 @@ import com.java.dogle.vo.member.MemberVO;
  * </pre>
  */
 public interface MemberService {
+	
+	/**
+     * 회원인증
+     *
+     * @param  MemberVO
+     * @return int
+     * @throws Exception
+     *
+     */
+	public int login(MemberVO param);
+	
 	
 	/**
      * 아이디중복확인
@@ -44,18 +55,7 @@ public interface MemberService {
      */
 	public int chkNickNameDup(MemberVO nickName);
 	
-	
-	/**
-     * 회원인증
-     *
-     * @param  MemberVO
-     * @return int
-     * @throws Exception
-     *
-     */
-	public int login(MemberVO param);
-	
-	
+		
 	/**
      * 회원등록
      *

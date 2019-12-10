@@ -15,20 +15,9 @@
       <el-menu-item index="3">
         <router-link to="/board">공지사항</router-link>
       </el-menu-item>
-      <el-submenu index="4">
-        <template slot="title">
-          <router-link to="/myPage">마이페이지</router-link>
-        </template>
-        <el-menu-item index="4-1">item one</el-menu-item>
-        <el-menu-item index="4-2">item two</el-menu-item>
-        <el-menu-item index="4-3">item three</el-menu-item>
-        <el-submenu index="4-4">
-          <template slot="title">item four</template>
-          <el-menu-item index="4-4-1">item one</el-menu-item>
-          <el-menu-item index="4-4-2">item two</el-menu-item>
-          <el-menu-item index="4-4-3">item three</el-menu-item>
-        </el-submenu>
-      </el-submenu>
+      <el-menu-item  index="4">
+        <router-link to="/member/myPage">마이페이지</router-link>
+      </el-menu-item >
     </el-menu>
     <router-view />
   </div>

@@ -1,13 +1,41 @@
 <template>
   <div class="myPage">
     <h1>마이페이지</h1>
-    <h2>회원정보 수정,즐겨찾기,예약내역관리,리뷰관리를 할 수 있는 페이지 입니다.</h2>
+    <div></div>
+    <el-row type="flex" class="row-bg" justify="space-around" >
+      <el-col :span="23" class="grid-content bg-purple">
+        <MyInfo></MyInfo>
+      </el-col>
+    </el-row>
+    <el-row type="flex" class="row-bg" justify="space-around">
+      <el-col :span="11" class="grid-content bg-purple">
+        <PetInfo></PetInfo>
+        <Reservation></Reservation>
+      </el-col>
+      <el-col :span="11"  class="grid-content bg-purple">
+        <Favorite></Favorite>
+        <Review></Review>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
+import MyInfo from './MyInformation/MyInfo'
+import PetInfo from './MyPetInfo/PetInfo'
+import Favorite from './MyFavorite/Favorite'
+import Reservation from './MyReservation/Reservation'
+import Review from './MyReview/Review'
+
 export default {
-  name: 'MyPageIndex'
+  name: 'MyPageIndex',
+  components: {
+    MyInfo,
+    PetInfo,
+    Favorite,
+    Reservation,
+    Review
+  }
 }
 </script>
 
@@ -27,5 +55,14 @@ li {
 }
 a {
   color: #42b983;
+}
+.el-row {
+  margin-bottom: 20px;
+}
+.el-row:last-child {
+  margin-bottom:  0px;
+}
+.bg-purple {
+  background: #efefef;
 }
 </style>

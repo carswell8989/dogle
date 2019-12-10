@@ -1,16 +1,12 @@
 package com.java.dogle.controller.member;
 
-import java.lang.reflect.Member;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.DogleException;
@@ -134,17 +130,14 @@ public class MemberController {
 	@CrossOrigin("*") 
 	@RequestMapping("/members")
 	public int registMember(@RequestBody MemberVO param) {
-		MemberVO memberInfo = param;
 		
-		// 비밀번호 암호화
+		MemberVO memberInfo = param;		
 		try {
 			memberInfo.setPassword(SHA256Util.encrypt(param.getPassword()));
 		} catch (DogleException e) {
 			e.printStackTrace();
 		}
-		
-
-		
+				
 		int result = memberService.registMember(memberInfo);
 		
 		LOGGER.info("registMember ::: {}", result);

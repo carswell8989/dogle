@@ -13,13 +13,14 @@
         <el-input placeholder="비밀번호를 입력하세요" v-model="memberVO.password" show-password class="user-input"></el-input>
         <button type="submit" class="btn-login">로그인</button>
         <el-button icon="el-icon-position" class="btn-join">
-          <router-link to="/signup">회원가입</router-link>
+          <router-link to="/member/SignUp">회원가입</router-link>
         </el-button>
       </form>
   </div>
 </template>
 
 <script>
+import memberStore from './Store/memberStore'
 
 export default {
   name: 'Login',
@@ -36,7 +37,7 @@ export default {
   },
   methods: {
     callLogin () {
-      this.$store.dispatch('login', this.memberVO)
+      memberStore.dispatch('login', this.memberVO)
         .then(() => {
           this.$router.push('/Protected')
         })

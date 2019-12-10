@@ -13,14 +13,10 @@
  </div>
 </template>
 <script>
+import api from './backend-api'
 export default {
   name: 'BoardIndex'
 }
-
-import api from 'backend-api'
-
-
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

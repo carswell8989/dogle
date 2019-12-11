@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import store from '@/views/Store/memberStore'
 import MainIndex from '@/views/Main'
 import HotelIndex from '@/views/HotelSearch/Index'
-import BoardIndex from '@/views/Board/Index'
+import NoticeIndex from '@/views/Notice/Index'
 import MyPageIndex from '@/views/MyPage/Index'
 import Login from '@/views/Login'
 import Protected from '@/views/Protected'
@@ -28,9 +28,9 @@ const router = new Router({
       }
     },
     {
-      path: '/board',
-      name: 'BoardIndex',
-      component: BoardIndex,
+      path: '/notice',
+      name: 'NoticeIndex',
+      component: NoticeIndex,
       meta: {
         requiresAuth: true
       }

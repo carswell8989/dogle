@@ -13,7 +13,7 @@
         <router-link to="/hotelSrh">호텔검색</router-link>
       </el-menu-item>
       <el-menu-item index="3">
-        <router-link to="/board">공지사항</router-link>
+        <router-link to="/notice">공지사항</router-link>
       </el-menu-item>
       <el-menu-item  index="4">
         <router-link to="/member/myPage">마이페이지</router-link>

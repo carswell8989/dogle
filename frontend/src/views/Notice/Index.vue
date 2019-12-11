@@ -13,9 +13,9 @@
  </div>
 </template>
 <script>
-import api from './backend-api'
+import api from '../Controller/Notice-api'
 export default {
-  name: 'BoardIndex'
+  name: 'NoticeIndex'
 }
 </script>
 

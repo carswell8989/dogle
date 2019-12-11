@@ -12,7 +12,7 @@ import com.java.dogle.vo.notice.NoticeVO;
 public class NoticeDao extends CommonDao {
 
 	public NoticeDao() {
-		this.nameSpace = "NoticeDao";
+		this.nameSpace = "noticeDao";
 	}
 	
 	

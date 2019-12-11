@@ -22,9 +22,6 @@ public class PagingUtil {
 			throw new DogleException("PageRow가 없습니다.");
 		}
 		
-		if(pageVo.getCurrentPage() <= 0) {
-			throw new DogleException("현재 페이지 정보가 없습니다.");
-		}	
 		int totalPage = 0;  //전체 페이지
 		int offset = 0; // 현재 페이지 기준 보여줄 글의 offset
 		

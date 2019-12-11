@@ -29,17 +29,18 @@ public class NoticeController {
      * @throws Exception
      *
      */
-	@CrossOrigin("*") 
-	@RequestMapping("/noticeSelectList/{titleKeyword}/")
-	public Map<String, Object> selectNoticeA(@PathVariable String titleKeyword) throws DogleException {
+	@CrossOrigin(origins="*") 
+	@RequestMapping("/noticeSelectList")
+	public Map<String, Object> selectNoticeA(@RequestBody NoticeVO param) throws DogleException {
 		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
-		NoticeVO param = new NoticeVO();
-		
-		if(null != titleKeyword && !"".equals(titleKeyword)) {
-			param.setTitleKeyword(titleKeyword);
-		}
+		/*
+		 * NoticeVO param = new NoticeVO();
+		 * 
+		 * if(null != titleKeyword && !"".equals(titleKeyword)) {
+		 * param.setTitleKeyword(titleKeyword); }
+		 */
 
 		resultMap.put("result", noticeService.selectNoticeA(param));
 		

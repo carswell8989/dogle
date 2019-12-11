@@ -13,11 +13,11 @@ const AXIOS = axios.create({
 export default {
    /**
    * 검색 
-   * @param {*} titleKeyword 
+   * @param {*} noticeVO 
    * 
    */
-  noticeSelectList(titleKeyword) {
-    return AXIOS.get('/noticeSelectList/' + titleKeyword)
+  noticeSelectList(noticeVO) {
+    return AXIOS.post('/noticeSelectList', noticeVO)
   },
 
 }

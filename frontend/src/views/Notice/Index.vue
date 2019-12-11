@@ -15,8 +15,30 @@
 <script>
 import api from '../Controller/Notice-api'
 export default {
-  name: 'NoticeIndex'
+  name: 'NoticeIndex',
+  data () {
+    return {
+      noticeVO: {
+        titleKeyword: 'test'
+      }
+    }
+  }, // data
+  methods: {
+    // 공지사항 검색
+    selectNoticeList () {
+      api
+        .noticeSelectList(this.noticeVO)
+        .then(response => {
+          console.log(response.data)
+        })
+    }
+  },
+  /** 화면 로딩시 실행  */
+  created: function () {
+    this.selectNoticeList()
+  }
 }
+/** 화면 로딩시 수행. */
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

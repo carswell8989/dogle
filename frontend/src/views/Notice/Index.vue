@@ -1,15 +1,16 @@
 <template>
-  <div>
+  <div style="width:100%">
     <div class="brdList">
       <h1>공지사항</h1>
       <h2>공지사항 페이지입니다.</h2>
     </div>
-    <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="date" label="Date" width="180"> </el-table-column>
-      <el-table-column prop="name" label="Name" width="180"> </el-table-column>
-      <el-table-column prop="address" label="Address"> </el-table-column>
+    <el-table :data="noticeVO.list" border style="width:100%">
+      <el-table-column prop="noticeNo" label="noticeNo"> </el-table-column>
+      <el-table-column prop="title" label="title"> </el-table-column>
+      <el-table-column prop="writer" label="writer"> </el-table-column>
+      <el-table-column prop="regDate" label="regDate"> </el-table-column>
     </el-table>
-    <el-pagination background layout="prev, pager, next" :total="100"></el-pagination>
+        <el-pagination background layout="prev, pager, next" :total="100"></el-pagination>
  </div>
 </template>
 <script>
@@ -19,7 +20,10 @@ export default {
   data () {
     return {
       noticeVO: {
-        titleKeyword: 'test'
+        titleKeyword: 'test',
+        pageRow: 10,
+        currentPage: 1,
+        list: []
       }
     }
   }, // data
@@ -29,7 +33,8 @@ export default {
       api
         .noticeSelectList(this.noticeVO)
         .then(response => {
-          console.log(response.data)
+          console.log(response.data.result)
+          this.noticeVO.list = response.data.result.list
         })
     }
   },

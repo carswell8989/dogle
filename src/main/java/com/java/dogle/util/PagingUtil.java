@@ -56,6 +56,10 @@ public class PagingUtil {
 		//시작 인덱스 = 페이지당 보여줄 글의 수 * (현재페이지 -1) + 1
 		offset = pageRow * (currentPage-1) + 1;
 
+		//1페이지는 offset 0 부터 시작.
+		if(offset == 1) {
+			offset = 0;
+		}
 
 		
 		pageVo.setOffset(offset);

@@ -45,7 +45,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 		//pageRow 설정
 		resultVo.setPageRow(10);
-		
+		resultVo.setCurrentPage(param.getCurrentPage());
 		//객체에 페이징 정보 셋팅 함수 호출. -> paramVo 이용
 		PagingUtil.setPageInfo(resultVo);
 		

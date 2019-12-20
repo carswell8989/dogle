@@ -10,11 +10,14 @@
       <el-table-column prop="writer" label="writer"> </el-table-column>
       <el-table-column prop="regDate" label="regDate"> </el-table-column>
     </el-table>
-        <el-pagination background layout="prev, pager, next" :total="100"></el-pagination>
+   <paginate v-model="noticeVO.currentPage" :page-count="pageCount" :page-range="3" :margin-pages="2" :click-handler="clickCallback" :prev-text="'Prev'" :next-text="'Next'" :container-class="'pagination'" :page-class="'page-item'"></paginate>
  </div>
 </template>
 <script>
 import api from '../Controller/Notice-api'
+import Paginate from 'vuejs-paginate'
+import Vue from 'vue'
+Vue.component('paginate', Paginate)
 export default {
   name: 'NoticeIndex',
   data () {
@@ -23,8 +26,11 @@ export default {
         titleKeyword: 'test',
         pageRow: 10,
         currentPage: 1,
-        list: []
-      }
+        list: [],
+        total: 100,
+        totalPage: 10
+      },
+      pageCount: 10
     }
   }, // data
   methods: {
@@ -34,8 +40,16 @@ export default {
         .noticeSelectList(this.noticeVO)
         .then(response => {
           console.log(response.data.result)
-          this.noticeVO.list = response.data.result.list
+          this.noticeVO = response.data.result
+          if (this.noticeVO.totalPage < this.pageCount) {
+            this.pageCount = this.noticeVO.totalPage
+          }
         })
+    },
+    clickCallback (num) {
+      console.log('num ? :' + num)
+      this.noticeVO.currentPage = num
+      this.selectNoticeList()
     }
   },
   /** 화면 로딩시 실행  */
@@ -43,7 +57,6 @@ export default {
     this.selectNoticeList()
   }
 }
-/** 화면 로딩시 수행. */
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
